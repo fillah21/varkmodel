@@ -1,0 +1,25 @@
+.hover:hover {
+  background-color: rgb(73, 73, 207);
+  background-color: rgb(183, 183, 219, 0.5);
+}
+
+.jarak {
+  margin-top: 100px;
+}
+
+.font {
+  font-size: 50px;
+}
+
+.font-style {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+.card-body-icon {
+  position: absolute;
+  z-index: 0;
+  top: 5px;
+  right: 50px;
+  opacity: 0.5;
+  font-size: 140px;
+}

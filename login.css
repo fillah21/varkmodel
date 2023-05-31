@@ -1,0 +1,23 @@
+.background {
+  height: 100%;
+  background-color: rgb(180, 180, 180);
+}
+.login-item {
+  height: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panjang {
+  width: 100%;
+}
+
+.login {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.lebar {
+  padding-top: 4px;
+  padding-bottom: 1px;
+}
