@@ -32,7 +32,7 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-sm-5 mt-3">
+                <div class="col-md-5 mt-3">
                     <p class="fs-4 text-white" style="text-align: justify;">VARK Model merupakan cara identifikasi empat gaya belajar utama yaitu:</p>
                     <ul class="text-white" style="font-size: 24px;">
                       <li>
@@ -53,7 +53,7 @@
                     </ul>
                 </div>
 
-                <div class="col-sm mt-3">
+                <div class="col-md mt-3">
                   <img class="img-fluid" src="img/visual2.png" alt="" width="900">
                 </div>
             </div>
