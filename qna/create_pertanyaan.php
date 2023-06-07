@@ -1,12 +1,30 @@
 <!doctype html>
 <?php 
-  // if(isset($_COOKIE['v']) || isset($_COOKIE['a']) || isset($_COOKIE['r']) || isset($_COOKIE['k']) || isset($_COOKIE['hasil'])) {
-  //   setcookie('v', '', time()-3600);
-  //   setcookie('a', '', time()-3600);
-  //   setcookie('r', '', time()-3600);
-  //   setcookie('k', '', time()-3600);
-  //   setcookie('hasil', '', time()-3600);
-  // }
+  require_once '../controller/pertanyaanController.php';
+
+  if(isset($_POST['submit'])) {
+    if (create($_POST) > 0) {
+      session_start();
+
+      $_SESSION["berhasil"] = "Data Pertanyaan Berhasil Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } else {
+      session_start();
+
+      $_SESSION["gagal"] = "Data Pertanyaan Gagal Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    }
+  }
 ?>
 <html lang="en">
   <head>
@@ -27,7 +45,7 @@
     <div class="container mt-3">
         <h3><i class="bi bi-patch-question-fill"></i> Tambah Data Pertanyaan</h3><hr>
 
-        <form action="">
+        <form action="" method="post">
             <div class="mb-3 row">
                 <label for="pertanyaan" class="col-sm-2 col-form-label">Pertanyaan</label>
     
@@ -46,8 +64,8 @@
             </div>
     
             <div class="mt-4">
-                <a href="" class="btn btn-primary me-1">Tambah Data</a>
-                <a href="" class="btn btn-secondary">Kembali</a>
+              <button class="btn btn-primary me-1" name="submit">Tambah Data</button>
+              <a href="" class="btn btn-secondary">Kembali</a>
             </div>
         </form>
     </div>

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
   <body class="font-style">
@@ -62,46 +63,7 @@
                             <td><?= $data['deskripsi']; ?></td>
                             <td>
                                 <a href="edit.php?id=<?= $data['idmodel']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                <button class="btn btn-danger btn-sm" id="button">Hapus</button>
-
-                                <script>
-                                    document.getElementById("button").addEventListener("click", function() {
-                                        // Menampilkan Sweet Alert dengan tombol Save dan Cancel
-                                        Swal.fire({
-                                            title: "Konfirmasi",
-                                            text: "Apakah Anda yakin ingin menyimpan?",
-                                            icon: "warning",
-                                            buttons: {
-                                                cancel: "Batal",
-                                                confirm: "Simpan"
-                                            },
-                                            dangerMode: true,
-                                        })
-                                        .then((willSave) => {
-                                            if (willSave) {
-                                                // Memanggil fungsi PHP menggunakan AJAX saat tombol Save diklik
-                                                $.ajax({
-                                                    url: "nama_file_php.php",
-                                                    type: "POST",
-                                                    data: {
-                                                        parameter: "nilai_parameter"
-                                                    },
-                                                    success: function(response) {
-                                                        // Menampilkan pesan sukses jika fungsi PHP berhasil dieksekusi
-                                                        swal("Sukses", "Data berhasil disimpan!", "success");
-                                                    },
-                                                    error: function(xhr, status, error) {
-                                                        // Menampilkan pesan error jika terjadi kesalahan dalam eksekusi fungsi PHP
-                                                        swal("Error", "Terjadi kesalahan: " + error, "error");
-                                                    }
-                                                });
-                                            } else {
-                                                // Menampilkan pesan jika tombol Cancel diklik
-                                                swal("Batal", "Data tidak disimpan", "info");
-                                            }
-                                        });
-                                    });
-                                </script>
+                                <button class="btn btn-danger btn-sm" id="delete" onclick="confirmDelete(<?= $data['idmodel']; ?>)">Hapus</button>
                             </td>
                         </tr>
                     <?php $i++; ?>
@@ -139,6 +101,55 @@
         // });
 
         // Menambahkan event listener pada button
+
+        function confirmDelete(id) {
+            // Menampilkan Sweet Alert dengan tombol Yes dan No
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                focusCancel: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Memanggil fungsi PHP menggunakan AJAX saat tombol Yes diklik
+                    $.ajax({
+                        url: '../controller/modelController.php',
+                        type: 'POST',
+                        data: {
+                        action: 'delete',
+                        id: id
+                    },
+                    success: function(response) {
+                        // Menampilkan pesan sukses jika data berhasil dihapus 
+                        Swal.fire({
+                            icon : 'success',
+                            title: 'Data Model Berhasil Dihapus!',
+                            confirmButtonText: 'Ok',
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.location.href='index.php';
+                            }
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                    // Menampilkan pesan error jika terjadi kesalahan dalam penghapusan data
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Terjadi kesalahan dalam menghapus data: ' + error,
+                            icon: 'error'
+                        });
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Menampilkan pesan jika tombol No diklik
+                    Swal.fire('Batal', 'Penghapusan data dibatalkan', 'info');
+                }
+            });
+        }
         
     </script>
   </body>
@@ -161,8 +172,10 @@
         session_unset();
         session_destroy();
 
+
     } elseif(isset($_SESSION['gagal'])) {
         $pesan = $_SESSION["gagal"];
+        
         echo "
             <script>
                 Swal.fire(
@@ -175,5 +188,7 @@
         $_SESSION = [];
         session_unset();
         session_destroy();
+
     }
+
 ?>

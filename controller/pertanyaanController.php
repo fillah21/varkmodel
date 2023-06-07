@@ -3,13 +3,12 @@
 
     function create($data) {
         global $conn;
-        $model = htmlspecialchars($data['model']);
-        $kode = htmlspecialchars($data['kode']);
-        $deskripsi = htmlspecialchars($data['deskripsi']);
+        $pertanyaan = $data['pertanyaan'];
+        $kode = $data['kode'];
 
-        $query = "INSERT INTO model
-                    VALUES 
-                    (NULL, '$model', '$kode', '$deskripsi')";
+        $query = "INSERT INTO pertanyaan
+                    VALUES
+                    (NULL, '$pertanyaan', '$kode')";
         mysqli_query($conn, $query);
 
         return mysqli_affected_rows($conn);
@@ -17,17 +16,14 @@
 
     function update($data) {
         global $conn;
-
-        $idmodel = $data['idmodel'];
-        $model = $data['model'];
+        $id = $data['idpertanyaan'];
+        $pertanyaan = $data['pertanyaan'];
         $kode = $data['kode'];
-        $deskripsi = $data['deskripsi'];
 
-        $query = "UPDATE model SET 
-                    model = '$model',
-                    kode = '$kode',
-                    deskripsi = '$deskripsi'
-                  WHERE idmodel = '$idmodel'
+        $query = "UPDATE pertanyaan SET 
+                    pertanyaan = '$pertanyaan',
+                    kode = '$kode'
+                  WHERE idpertanyaan = '$id'
                 ";
         mysqli_query($conn, $query);
 
@@ -36,7 +32,7 @@
 
     function delete($id) {
         global $conn;
-        mysqli_query($conn, "DELETE FROM model WHERE idmodel = $id");
+        mysqli_query($conn, "DELETE FROM pertanyaan WHERE idpertanyaan = $id");
 
         $deleted = true;
 
