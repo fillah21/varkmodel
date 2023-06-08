@@ -65,7 +65,7 @@
     
             <div class="mt-4">
               <button class="btn btn-primary me-1" name="submit">Tambah Data</button>
-              <a href="" class="btn btn-secondary">Kembali</a>
+              <a href="index.php" class="btn btn-secondary">Kembali</a>
             </div>
         </form>
     </div>

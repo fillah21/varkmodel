@@ -4,7 +4,9 @@
 
   $id = $_GET['id'];
 
-  $data = query("SELECT * FROM model WHERE idmodel = $id") [0];
+  $dekripsi = dekripsi($id);
+
+  $data = query("SELECT * FROM model WHERE idmodel = $dekripsi") [0];
 
   if(isset($_POST['submit'])) {
     if (update($_POST) > 0) {
@@ -77,7 +79,7 @@
     
             <div class="mt-4">
                 <button type="submit" class="btn btn-success me-1" name="submit">Ubah Data</button>
-                <a href="" class="btn btn-secondary">Kembali</a>
+                <a href="index.php" class="btn btn-secondary">Kembali</a>
             </div>
         </form>
     </div>

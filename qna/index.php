@@ -45,7 +45,7 @@
                     <h1>5</h1>
                     <i class="bi bi-bar-chart-steps" style="font-size: 100px;"></i>
                 </div>
-                <a href="" class="btn btn-primary mx-1 mb-1">Tambah Data Jawaban</a>
+                <a href="create_jawaban.php" class="btn btn-primary mx-1 mb-1">Tambah Data Jawaban</a>
             </div>
         </div>
 
@@ -62,13 +62,16 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($pertanyaan as $data) : ?>
+                    <?php 
+                        foreach ($pertanyaan as $data) : 
+                        $enkripsi = enkripsi($data['idpertanyaan']);
+                    ?>
                     <tr>
                         <td><?= $i; ?></td>
                         <td><?= $data['pertanyaan']; ?></td>
                         <td><?= $data['kode']; ?></td>
                         <td>
-                            <a href="edit_pertanyaan.php?id=<?= $data['idpertanyaan']; ?>" class="btn btn-success btn-sm">Edit</a>
+                            <a href="edit_pertanyaan.php?id=<?= $enkripsi; ?>" class="btn btn-success btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm" id="deletePertanyaan" onclick="deletePertanyaan(<?= $data['idpertanyaan']; ?>)">Hapus</button>
                         </td>
                     </tr>

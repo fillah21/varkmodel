@@ -1,12 +1,32 @@
 <!doctype html>
 <?php 
-  // if(isset($_COOKIE['v']) || isset($_COOKIE['a']) || isset($_COOKIE['r']) || isset($_COOKIE['k']) || isset($_COOKIE['hasil'])) {
-  //   setcookie('v', '', time()-3600);
-  //   setcookie('a', '', time()-3600);
-  //   setcookie('r', '', time()-3600);
-  //   setcookie('k', '', time()-3600);
-  //   setcookie('hasil', '', time()-3600);
-  // }
+  require_once '../controller/rekomendasiController.php';
+
+  $model = query("SELECT * FROM model");
+
+  if(isset($_POST['submit'])) {
+    if (create($_POST) > 0) {
+      session_start();
+
+      $_SESSION["berhasil"] = "Data Rekomendasi Belajar Berhasil Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } else {
+      session_start();
+
+      $_SESSION["gagal"] = "Data Rekomendasi Belajar Gagal Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    }
+  }
 ?>
 <html lang="en">
   <head>
@@ -27,16 +47,16 @@
     <div class="container mt-3">
         <h3><i class="bi bi-grid"></i> Tambah Data Rekomendasi Belajar</h3><hr>
 
-        <form action="">
+        <form action="" method="post">
             <div class="mb-3 row">
                 <label for="model" class="col-sm-2 col-form-label">Model</label>
     
                 <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="model">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                      <option value="" disabled selected hidden>--Pilih Model--</option>
+                      <?php foreach ($model as $data) : ?>
+                        <option value="<?= $data['idmodel']; ?>"><?= $data['model']; ?></option>
+                      <?php endforeach; ?>
                     </select>
                 </div>
             </div>
@@ -50,8 +70,8 @@
             </div>
     
             <div class="mt-4">
-                <a href="" class="btn btn-primary me-1">Tambah Data</a>
-                <a href="" class="btn btn-secondary">Kembali</a>
+              <button class="btn btn-primary me-1" name="submit">Tambah Data</button>
+              <a href="index.php" class="btn btn-secondary">Kembali</a>
             </div>
         </form>
     </div>

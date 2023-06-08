@@ -55,14 +55,17 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($model as $data) :?>
+                    <?php 
+                        foreach ($model as $data) :
+                        $enkripsi = enkripsi($data['idmodel']);
+                    ?>
                         <tr>
                             <td><?= $i; ?></td>
                             <td><?= $data['model']; ?></td>
                             <td><?= $data['kode']; ?></td>
                             <td><?= $data['deskripsi']; ?></td>
                             <td>
-                                <a href="edit.php?id=<?= $data['idmodel']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="edit.php?id=<?= $enkripsi; ?>" class="btn btn-success btn-sm">Edit</a>
                                 <button class="btn btn-danger btn-sm" id="delete" onclick="confirmDelete(<?= $data['idmodel']; ?>)">Hapus</button>
                             </td>
                         </tr>
