@@ -28,3 +28,11 @@ CREATE TABLE `rekomendasi` (
 
     foreign key(idmodel) references model(idmodel) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE `kriteria` (
+    `idkriteria` int(11) primary key auto_increment,
+    `idmodel` int(11) NOT NULL,
+    `kriteria` text NOT NULL,
+
+    foreign key(idmodel) references model(idmodel) ON DELETE CASCADE ON UPDATE CASCADE
+);

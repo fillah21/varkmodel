@@ -63,7 +63,7 @@
     
                 <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="model">
-                      <option value="<?= $data['idmodel']; ?>" disabled selected hidden><?= $nama_model['model']; ?></option>
+                      <option value="<?= $data['idmodel']; ?>" selected hidden><?= $nama_model['model']; ?></option>
                       <?php foreach ($model as $m) : ?>
                         <option value="<?= $m['idmodel']; ?>"><?= $m['model']; ?></option>
                       <?php endforeach; ?>
