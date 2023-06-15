@@ -39,14 +39,51 @@
             </div>
 
             
+            
             <div class="card" style="width: 18rem;">
                 <h5 class="ms-3 mt-3 card-title">Jumlah Jawaban</h5>
                 <div class="cardo d-flex justify-content-between align-items-center mx-3">
                     <h1>5</h1>
                     <i class="bi bi-bar-chart-steps" style="font-size: 100px;"></i>
                 </div>
-                <a href="create_jawaban.php" class="btn btn-primary mx-1 mb-1">Tambah Data Jawaban</a>
+                <button type="button" class="btn btn-primary mx-1 mb-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Tambah Data Jawaban
+                </button>
             </div>
+            
+            <!-- Modal Jawaban -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <form action="create_jawaban.php" method="post">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="kode_pertanyaan" class="form-label">Pilih pertanyaan sebelum memasukkan data jawaban</label>
+                            
+                                    <div class="">
+                                        <select class="form-select" aria-label="Default select example" name="pertanyaan">
+                                            <?php foreach ($pertanyaan as $p) : ?>
+                                                <option value="<?= $p['idpertanyaan']; ?>"><?= $p['pertanyaan']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Pilih</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Jawaban Selesai -->
         </div>
 
         <div class="my-5">

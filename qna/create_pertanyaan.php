@@ -2,6 +2,8 @@
 <?php 
   require_once '../controller/pertanyaanController.php';
 
+  $kode = kode();
+
   if(isset($_POST['submit'])) {
     if (create($_POST) > 0) {
       session_start();
@@ -59,7 +61,7 @@
                 <label for="kode" class="col-sm-2 col-form-label">Kode</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="kode" value="" name="kode">
+                    <input type="text" class="form-control" id="kode" value="<?= $kode; ?>" name="kode" readonly>
                 </div>
             </div>
     
