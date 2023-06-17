@@ -1,17 +1,44 @@
 <!doctype html>
 <?php
-    require_once '../controller/pertanyaanController.php'; 
-    $idpertanyaan = $_POST['pertanyaan'];
+    require_once '../controller/jawabanController.php'; 
 
-    $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
-
-    $jumlah_string = strlen($pertanyaan['kode']);
-
-    if($jumlah_string == 2) {
-        $kode = substr($pertanyaan['kode'], 1);
+    if(isset($_POST['submit'])) {
+        if (create($_POST) > 0) {
+            session_start();
+      
+            $_SESSION["berhasil"] = "Data Jawaban Berhasil Ditambahkan!";
+      
+            echo "
+                <script>
+                  document.location.href='index.php';
+                </script>
+            ";
+          } else {
+            session_start();
+      
+            $_SESSION["gagal"] = "Data Jawaban Gagal Ditambahkan!";
+      
+            echo "
+                <script>
+                  document.location.href='index.php';
+                </script>
+            ";
+          }
     } else {
-        $kode = substr($pertanyaan['kode'], 1, 2);
+        $idpertanyaan = $_POST['pertanyaan'];
+    
+        $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
+    
+        $jumlah_string = strlen($pertanyaan['kode']);
+    
+        if($jumlah_string == 2) {
+            $kode = substr($pertanyaan['kode'], 1);
+        } else {
+            $kode = substr($pertanyaan['kode'], 1, 2);
+        }
     }
+
+
 ?>
 <html lang="en">
   <head>
@@ -32,7 +59,7 @@
     <div class="container mt-3">
         <h3><i class="bi bi-bar-chart-steps"></i> Tambah Data Jawaban</h3><hr>
 
-        <form action="../enkripsi.php" method="post">
+        <form action="" method="post">
             <input type="hidden" name="idpertanyaan[]" value="<?= $idpertanyaan; ?>">
             <input type="hidden" name="idpertanyaan[]" value="<?= $idpertanyaan; ?>">
             <input type="hidden" name="idpertanyaan[]" value="<?= $idpertanyaan; ?>">
@@ -71,7 +98,7 @@
                         <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
             
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="bobot" value="" name="bobot[]">
+                            <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.1" max="1">
                         </div>
                     </div>
             
@@ -106,7 +133,7 @@
                         <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
             
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="bobot" value="" name="bobot">
+                            <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.1" max="1">
                         </div>
                     </div>
                 </div>
@@ -125,7 +152,7 @@
                         <label for="jawaban" class="col-sm-2 col-form-label">Jawaban</label>
             
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="jawaban" name="jawaban" rows="10"></textarea>
+                            <textarea class="form-control" id="jawaban" name="jawaban[]" rows="10"></textarea>
                         </div>
                     </div>
             
@@ -135,7 +162,7 @@
                         <label for="kode" class="col-sm-2 col-form-label">Kode</label>
             
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="R<?= $kode; ?>" aria-label="Disabled input example" disabled readonly>
+                            <input class="form-control" type="text" value="R<?= $kode; ?>" aria-label="Disabled input example" readonly name="kode[]">
                         </div>
                     </div>
             
@@ -143,7 +170,7 @@
                         <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
             
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="bobot" value="" name="bobot">
+                            <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.1" max="1">
                         </div>
                     </div>
             
@@ -160,7 +187,7 @@
                         <label for="jawaban" class="col-sm-2 col-form-label">Jawaban</label>
             
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="jawaban" name="jawaban" rows="10"></textarea>
+                            <textarea class="form-control" id="jawaban" name="jawaban[]" rows="10"></textarea>
                         </div>
                     </div>
             
@@ -170,7 +197,7 @@
                         <label for="kode" class="col-sm-2 col-form-label">Kode</label>
             
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="K<?= $kode; ?>" aria-label="Disabled input example" disabled readonly>
+                            <input class="form-control" type="text" value="K<?= $kode; ?>" aria-label="Disabled input example" readonly name="kode[]">
                         </div>
                     </div>
             
@@ -178,13 +205,13 @@
                         <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
             
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="bobot" value="" name="bobot">
+                            <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.1" max="1">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="my-4">
-                <button type="submit" class="btn btn-primary me-1">Tambah Data</button>
+                <button type="submit" class="btn btn-primary me-1" name="submit">Tambah Data</button>
                 <a href="index.php" class="btn btn-secondary">Kembali</a>
             </div>
         </form>

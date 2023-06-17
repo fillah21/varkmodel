@@ -1,7 +1,6 @@
 <?php 
-  
-
-
+  session_start();
+  require_once 'controller/userController.php';
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">
@@ -12,6 +11,8 @@
     <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap-icons-1.10.3/bootstrap-icons.css" />
     <link rel="stylesheet" href="login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
   <body class="background">
@@ -71,3 +72,41 @@
     <script src="bootstrap-5.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php 
+    if(isset($_SESSION["berhasil"])) {
+        $pesan = $_SESSION["berhasil"];
+
+        echo "
+              <script>
+                Swal.fire(
+                  'Berhasil!',
+                  '$pesan',
+                  'success'
+                )
+              </script>
+          ";
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+
+
+    } elseif(isset($_SESSION['gagal'])) {
+        $pesan = $_SESSION["gagal"];
+        
+        echo "
+            <script>
+                Swal.fire(
+                    'Gagal!',
+                    '$pesan',
+                    'error'
+                )
+            </script>
+        ";
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+
+    }
+
+?>

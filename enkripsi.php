@@ -4,10 +4,6 @@
             var_dump($_POST["nama"] [$i]);
         }
     }
-  
-  $pertanyaan = $_POST['idpertanyaan'];
-
-  var_dump($pertanyaan);
 ?>
 
 

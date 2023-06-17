@@ -36,3 +36,13 @@ CREATE TABLE `kriteria` (
 
     foreign key(idmodel) references model(idmodel) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE `user` (
+    `iduser` int(11) primary key auto_increment,
+    `username` varchar(45) NOT NULL,
+    `pwd` varchar(100) NOT NULL,
+    `nama` varchar(100) NOT NULL,
+    `instansi` varchar(45) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `role` varchar(10) NOT NULL
+);

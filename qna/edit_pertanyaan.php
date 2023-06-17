@@ -65,7 +65,7 @@
                 <label for="kode" class="col-sm-2 col-form-label">Kode</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="kode" value="<?= $data['kode']; ?>" name="kode">
+                    <input type="text" class="form-control" id="kode" value="<?= $data['kode']; ?>" name="kode" readonly>
                 </div>
             </div>
     

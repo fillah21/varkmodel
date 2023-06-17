@@ -4,8 +4,8 @@
     function create($data) {
         global $conn;
 
-        $idmodel = $data['model'];
-        $kriteria = $data['kriteria'];
+        $idmodel = htmlspecialchars($data['model']);
+        $kriteria = htmlspecialchars($data['kriteria']);
 
         $query = "INSERT INTO kriteria
                     VALUES
@@ -20,8 +20,8 @@
         global $conn;
 
         $id = $data['idkriteria'];
-        $idmodel = $data['model'];
-        $kriteria = $data['kriteria'];
+        $idmodel = htmlspecialchars($data['model']);
+        $kriteria = htmlspecialchars($data['kriteria']);
 
         $query = "UPDATE kriteria SET 
                 idmodel = '$idmodel',

@@ -1,7 +1,6 @@
 <?php 
-  
-
-
+  require_once 'controller/userController.php'; 
+  session_start();
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">
@@ -12,6 +11,8 @@
     <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap-icons-1.10.3/bootstrap-icons.css" />
     <link rel="stylesheet" href="login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
   <body class="background">
@@ -23,10 +24,7 @@
           <h1 class="card-title text-center mb-2 login fw-bold">REGISTER</h1>
           <p class="text-center mb-3">Silahkan Registrasi akun anda untuk dapat menggunakan aplikasi</p>
 
-          <form action="index.php" method="POST">
-            <?php if (isset ($error)) : ?>
-              <p style="color: red; font-style: italic;">Username / Password Salah</p>
-            <?php endif;?>
+          <form action="" method="POST">
 
             <div class="input-group mb-2">
               <input type="text" class="form-control" placeholder="Username" name="username" />
@@ -109,3 +107,27 @@
     <script src="bootstrap-5.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['register'])) {
+    if (register($_POST) > 0) {
+      $_SESSION["berhasil"] = "Registrasi Berhasil!";
+
+      echo "
+          <script>
+            document.location.href='login.php';
+          </script>
+      ";
+    } elseif(register($_POST) == 0) {
+      echo "
+          <script>
+              Swal.fire(
+                'Gagal!',
+                'Registrasi Gagal!',
+                'error'
+            )
+          </script>
+      ";
+    }
+  }
+  ?>

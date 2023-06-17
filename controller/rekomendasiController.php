@@ -3,8 +3,8 @@
 
     function create($data) {
         global $conn;
-        $idmodel = $data['model'];
-        $rekomendasi = $data['rekomendasi'];
+        $idmodel = htmlspecialchars($data['model']);
+        $rekomendasi = htmlspecialchars($data['rekomendasi']);
 
         $query = "INSERT INTO rekomendasi
                     VALUES
@@ -18,8 +18,8 @@
         global $conn;
 
         $id = $data['idrekomendasi'];
-        $idmodel = $data['model'];
-        $rekomendasi = $data['rekomendasi'];
+        $idmodel = htmlspecialchars($data['model']);
+        $rekomendasi = htmlspecialchars($data['rekomendasi']);
 
         $query = "UPDATE rekomendasi SET 
                 idmodel = '$idmodel',

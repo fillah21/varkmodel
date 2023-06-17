@@ -3,8 +3,11 @@
     session_start();
     require_once '../controller/pertanyaanController.php';
 
-    $pertanyaan = query("SELECT * FROM pertanyaan");
-    $jumlah_pertanyan = jumlah_data("SELECT * FROM pertanyaan");
+    $pertanyaan = query("SELECT * FROM pertanyaan ORDER BY kode ASC");
+    $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan");
+
+    $jawaban = query("SELECT * FROM jawaban ORDER BY kode ASC");
+    $jumlah_jawaban = jumlah_data("SELECT * FROM jawaban");
 ?>
 <html lang="en">
   <head>
@@ -32,7 +35,7 @@
             <div class="card me-5" style="width: 18rem;">
                 <h5 class="ms-3 mt-3 card-title">Jumlah Pertanyaan</h5>
                 <div class="d-flex justify-content-between align-items-center mx-3">
-                    <h1><?= $jumlah_pertanyan; ?></h1>
+                    <h1><?= $jumlah_pertanyaan; ?></h1>
                     <i class="bi bi-patch-question-fill" style="font-size: 100px;"></i>
                 </div>
                 <a href="create_pertanyaan.php" class="btn btn-primary mx-1 mb-1">Tambah Data Pertanyaan</a>
@@ -43,7 +46,7 @@
             <div class="card" style="width: 18rem;">
                 <h5 class="ms-3 mt-3 card-title">Jumlah Jawaban</h5>
                 <div class="cardo d-flex justify-content-between align-items-center mx-3">
-                    <h1>5</h1>
+                    <h1><?= $jumlah_jawaban; ?></h1>
                     <i class="bi bi-bar-chart-steps" style="font-size: 100px;"></i>
                 </div>
                 <button type="button" class="btn btn-primary mx-1 mb-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -90,7 +93,7 @@
             <h1 class="mb-3">Data Pertanyaan</h1>
             <table id="example" class="display" style="width:100%">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>No</th>
                         <th>Pertanyaan</th>
                         <th>Kode</th>
@@ -133,28 +136,29 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>P1</td>
-                        <td>Apakah...............?</td>
-                        <td>V1</td>
-                        <td>0.8</td>
-                        <td>
-                            <a href="" class="btn btn-success btn-sm">Edit</a>
-                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>P1</td>
-                        <td>Apakah...............?</td>
-                        <td>A1</td>
-                        <td>0,6</td>
-                        <td>
-                            <a href="" class="btn btn-success btn-sm">Edit</a>
-                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
-                        </td>
-                    </tr>
+                    <?php 
+                        $k = 1;
+                        foreach ($jawaban as $j) :
+                     ?>
+                        <tr>
+                            <td><?= $k; ?></td>
+                            <?php
+                                $idpertanyaan =  $j['idpertanyaan'];
+                                $nama = query("SELECT kode FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
+                            ?>
+                            <td><?= $nama['kode']; ?></td>
+                            <td><?= $j['jawaban']; ?></td>
+                            <td><?= $j['kode']; ?></td>
+                            <td><?= $j['bobot']; ?></td>
+                            <td>
+                                <a href="" class="btn btn-success btn-sm">Edit</a>
+                                <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php 
+                        $k++;
+                        endforeach;
+                    ?>
                 </tbody>
             </table>
         </div>

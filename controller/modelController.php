@@ -19,9 +19,9 @@
         global $conn;
 
         $idmodel = $data['idmodel'];
-        $model = $data['model'];
-        $kode = $data['kode'];
-        $deskripsi = $data['deskripsi'];
+        $model = htmlspecialchars($data['model']);
+        $kode = htmlspecialchars($data['kode']);
+        $deskripsi = htmlspecialchars($data['deskripsi']);
 
         $query = "UPDATE model SET 
                     model = '$model',

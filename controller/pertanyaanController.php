@@ -34,8 +34,8 @@
 
     function create($data) {
         global $conn;
-        $pertanyaan = $data['pertanyaan'];
-        $kode = $data['kode'];
+        $pertanyaan = htmlspecialchars($data['pertanyaan']);
+        $kode = htmlspecialchars($data['kode']);
 
         $query = "INSERT INTO pertanyaan
                     VALUES
@@ -48,8 +48,8 @@
     function update($data) {
         global $conn;
         $id = $data['idpertanyaan'];
-        $pertanyaan = $data['pertanyaan'];
-        $kode = $data['kode'];
+        $pertanyaan = htmlspecialchars($data['pertanyaan']);
+        $kode = htmlspecialchars($data['kode']);
 
         $query = "UPDATE pertanyaan SET 
                     pertanyaan = '$pertanyaan',
