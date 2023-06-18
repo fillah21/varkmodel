@@ -1,6 +1,7 @@
 <?php 
   require_once '../controller/userController.php'; 
   session_start();
+  validasi_admin();
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">

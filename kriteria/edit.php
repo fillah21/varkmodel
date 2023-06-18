@@ -1,6 +1,8 @@
 <!doctype html>
 <?php 
   require_once '../controller/kriteriaController.php';
+  validasi_admin();
+  
   $id = $_GET['id'];
 
   $dekripsi = dekripsi($id);

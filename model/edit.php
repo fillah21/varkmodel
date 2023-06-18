@@ -1,6 +1,7 @@
 <!doctype html>
 <?php 
   require_once '../controller/modelController.php';
+  validasi_admin();
 
   $id = $_GET['id'];
 

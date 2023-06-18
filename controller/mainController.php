@@ -59,4 +59,53 @@
         
         return $hasil;
     }
+
+    function validasi() {
+        global $conn;
+        if (!isset($_COOKIE['VRK21ZA'])) {
+            echo "<script>
+                    document.location.href='logout.php';
+                  </script>";
+            exit;
+          }
+        
+          $id = dekripsi($_COOKIE['VRK21ZA']);
+        
+          $result = mysqli_query($conn, "SELECT * FROM user WHERE iduser = '$id'");
+        
+          if (mysqli_num_rows($result) !== 1) {
+            echo "<script>
+                    document.location.href='logout.php';
+                  </script>";
+            exit;
+          }
+    }
+
+    function validasi_admin() {
+        global $conn;
+        if (!isset($_COOKIE['VRK21ZA'])) {
+            echo "<script>
+                    document.location.href='../logout.php';
+                  </script>";
+            exit;
+        }
+        
+        $id = dekripsi($_COOKIE['VRK21ZA']);
+
+        $cek = query("SELECT * FROM user WHERE iduser = $id") [0];
+        
+        $result = mysqli_query($conn, "SELECT * FROM user WHERE iduser = '$id'");
+    
+        if (mysqli_num_rows($result) !== 1) {
+            echo "<script>
+                    document.location.href='../logout.php';
+                  </script>";
+            exit;
+        } elseif($cek['role'] !== "Admin") {
+            echo "<script>
+                    document.location.href='../logout.php';
+                  </script>";
+            exit;
+        }
+    }
 ?>

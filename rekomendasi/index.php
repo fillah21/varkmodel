@@ -2,6 +2,7 @@
 <?php 
   session_start();
   require_once '../controller/rekomendasiController.php';
+  validasi_admin();
 
   $rekomendasi = query("SELECT * FROM rekomendasi");
   $jumlah = jumlah_data("SELECT * FROM rekomendasi");

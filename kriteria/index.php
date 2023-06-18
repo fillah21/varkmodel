@@ -2,6 +2,7 @@
 <?php 
     session_start();
     require_once '../controller/kriteriaController.php';
+    validasi_admin();
 
     $kriteria = query("SELECT * FROM kriteria");
     $jumlah = jumlah_data("SELECT * FROM kriteria");

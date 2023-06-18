@@ -1,6 +1,7 @@
 <?php 
     session_start();
     require_once '../controller/userController.php';
+    validasi_admin();
 
     $jumlah_user = jumlah_data("SELECT * FROM user WHERE role = 'User'");
     $jumlah_admin = jumlah_data("SELECT * FROM user WHERE role = 'Admin'");

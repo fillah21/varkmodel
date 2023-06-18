@@ -1,5 +1,6 @@
 <?php 
   require_once '../controller/modelController.php';
+  validasi_admin();
 
   if(isset($_POST['submit'])) {
     if (create($_POST) > 0) {

@@ -1,3 +1,9 @@
+<?php
+  require_once 'controller/userController.php';
+
+  validasi();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

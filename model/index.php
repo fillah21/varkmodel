@@ -1,6 +1,7 @@
 <?php 
     session_start();
     require_once '../controller/modelController.php';
+    validasi_admin();
     
     $model = query("SELECT * FROM model");
     $jumlah = jumlah_data("SELECT * FROM model");
@@ -84,26 +85,6 @@
         $(document).ready(function () {
             $('#example').DataTable();
         });
-
-        // document.getElementById("button").addEventListener("click", function() {
-        //     // Memunculkan Sweet Alert saat button diklik
-        //     Swal.fire({
-        //         title: 'Do you want to save the changes?',
-        //         showDenyButton: true,
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Save',
-        //         denyButtonText: `Don't save`,
-        //         }).then((result) => {
-        //         /* Read more about isConfirmed, isDenied below */
-        //         if (result.isConfirmed) {
-        //             Swal.fire('Saved!', '', 'success')
-        //         } else if (result.isDenied) {
-        //             Swal.fire('Changes are not saved', '', 'info')
-        //         }
-        //     })
-        // });
-
-        // Menambahkan event listener pada button
 
         function confirmDelete(id) {
             // Menampilkan Sweet Alert dengan tombol Yes dan No

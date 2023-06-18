@@ -3,28 +3,10 @@
   require_once 'controller/userController.php';
 
   if (isset($_POST["login"])) {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    //cek username apakah ada di database atau tidak
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
-
-    if (mysqli_num_rows($result) === 1) {
-      //cek password
-      $row = mysqli_fetch_assoc($result);
-      //password_verify() untuk mengecek apakah sebuah password itu sama atau tidak dengan hash nya
-      //parameternya yaitu string yang belum diacak dan string yang sudah diacak
-      if (password_verify($password, $row["pwd"])) {
-        $enkripsi = enkripsi($row['iduser']);
-
-        setcookie('VRK21ZA', $enkripsi, time() + 10800);
-        echo "<script>
-                document.location.href='index.php';
-              </script>";
-        exit;
-      }
+    if(login($_POST) == 1) {
+      $error = true;
     }
-    $error = true;
+    
   }
 ?>
 <!DOCTYPE html>

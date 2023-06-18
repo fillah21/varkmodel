@@ -1,6 +1,7 @@
 <?php 
   require_once 'controller/userController.php'; 
   session_start();
+
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">
@@ -107,12 +108,25 @@
   if(isset($_POST['register'])) {
     if (register($_POST) > 0) {
       $_SESSION["berhasil"] = "Registrasi Berhasil!";
+      
+      if(isset($_COOKIE['VRK21ZA'])) {
+        $key = dekripsi($_COOKIE['VRK21ZA']);
+        $hasil = query("SELECT * FROM user WHERE iduser = $key") [0];
 
-      echo "
-          <script>
-            document.location.href='login.php';
-          </script>
-      ";
+        if($hasil['role'] == 'Admin') {
+          echo "
+              <script>
+                document.location.href='pengguna/index.php';
+              </script>
+          ";
+        }
+      } else {
+        echo "
+            <script>
+              document.location.href='login.php';
+            </script>
+        ";
+      }
     } elseif(register($_POST) == 0) {
       echo "
           <script>

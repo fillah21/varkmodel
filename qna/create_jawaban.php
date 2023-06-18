@@ -1,6 +1,7 @@
 <!doctype html>
 <?php
     require_once '../controller/jawabanController.php'; 
+    validasi_admin();
 
     if(isset($_POST['submit'])) {
         if (create($_POST) > 0) {

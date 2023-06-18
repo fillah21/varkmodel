@@ -2,6 +2,8 @@
 <?php 
   require_once '../controller/kriteriaController.php';
 
+  validasi_admin();
+
   $model = query("SELECT * FROM model");
 
   if(isset($_POST['submit'])) {

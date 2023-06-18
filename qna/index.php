@@ -2,6 +2,7 @@
 <?php 
     session_start();
     require_once '../controller/pertanyaanController.php';
+    validasi_admin();
 
     $pertanyaan = query("SELECT * FROM pertanyaan ORDER BY kode ASC");
     $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan");
@@ -29,7 +30,7 @@
 
     <!-- Bagian Content -->
     <div class="container mt-3">
-        <h3 class="mb-3"><i class="bi bi-bar-chart-steps"></i> Data Pertanyaan da Jawaban</h3><hr>
+        <h3 class="mb-3"><i class="bi bi-bar-chart-steps"></i> Data Pertanyaan dan Jawaban</h3><hr>
 
         <div class="d-flex">
             <div class="card me-5" style="width: 18rem;">

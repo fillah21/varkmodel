@@ -1,6 +1,7 @@
 <!doctype html>
 <?php 
   require_once '../controller/rekomendasiController.php';
+  validasi_admin();
 
   $model = query("SELECT * FROM model");
 

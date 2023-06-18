@@ -1,6 +1,7 @@
 <?php 
     require_once '../controller/userController.php';
     session_start();
+    validasi_admin();
 
     $dekripsi = dekripsi($_GET['id']);
     
