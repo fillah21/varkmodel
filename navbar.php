@@ -1,5 +1,5 @@
 <?php 
-    require_once '../controller/mainController.php';
+    require_once 'controller/mainController.php';
 
     $id = dekripsi($_COOKIE['VRK21ZA']);
 
@@ -9,12 +9,12 @@
 <!-- Membuat Navbar -->
 <nav class="navbar navbar-expand navbar-light" style="background-color:#5075cc;">
     <div class="container">
-        <a class="navbar-brand text-white fw-bold fs-3 " href="../index.php">VARK Model</a>
+        <a class="navbar-brand text-white fw-bold fs-3 " href="index.php">VARK Model</a>
         
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav me-3 ">
                 <li class="nav-item">
-                    <a class="nav-link fw-bold text-white" href="../index.php">Home</a>
+                    <a class="nav-link fw-bold text-white" href="index.php">Home</a>
                 </li>
             </ul>
             <div class="btn-group">
@@ -22,9 +22,9 @@
                     Selamat Datang <b><?= $data['nama']; ?></b>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="../profile">Profile dan Riwayat Tes</a></li>
+                    <li><a class="dropdown-item" href="profile">Profile dan Riwayat Tes</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../logout.php"><i class="bi bi-power"></i> Logout</a></li>
+                    <li><a class="dropdown-item" href="logout.php"><i class="bi bi-power"></i> Logout</a></li>
                 </ul>
             </div>
         </div>    

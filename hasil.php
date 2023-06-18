@@ -46,7 +46,7 @@
   </head>
 
   <body class="font-style" style="background-color: rgb(250, 251, 255);">
-    <?php require_once ("layout/navbar.php"); ?>
+    <?php require_once ("navbar.php"); ?>
 
     <!-- Bagian Content -->
     <div class="container text-white mt-5 shadow" style="background-color: rgb(110, 110, 197, 1); border-radius: 12px; border: 5px solid rgb(183, 183, 219, 0.3);">

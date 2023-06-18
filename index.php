@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php 
-      require_once ('layout/navbar.php');
+      require_once ('navbar.php');
     ?>
 
     <section class="py-5 text-center container">

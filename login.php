@@ -1,6 +1,31 @@
 <?php 
   session_start();
   require_once 'controller/userController.php';
+
+  if (isset($_POST["login"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    //cek username apakah ada di database atau tidak
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+    if (mysqli_num_rows($result) === 1) {
+      //cek password
+      $row = mysqli_fetch_assoc($result);
+      //password_verify() untuk mengecek apakah sebuah password itu sama atau tidak dengan hash nya
+      //parameternya yaitu string yang belum diacak dan string yang sudah diacak
+      if (password_verify($password, $row["pwd"])) {
+        $enkripsi = enkripsi($row['iduser']);
+
+        setcookie('VRK21ZA', $enkripsi, time() + 10800);
+        echo "<script>
+                document.location.href='index.php';
+              </script>";
+        exit;
+      }
+    }
+    $error = true;
+  }
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">
@@ -25,7 +50,7 @@
           <h5 class="card-title text-center mb-2 login">TES GAYA BELAJAR DENGAN VARK MODEL</h5>
           <p class="text-center mb-3">Silahkan Login untuk masuk ke aplikasi</p>
 
-          <form action="index.php" method="POST">
+          <form action="" method="POST">
             <?php if (isset ($error)) : ?>
               <p style="color: red; font-style: italic;">Username / Password Salah</p>
             <?php endif;?>

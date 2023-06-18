@@ -149,7 +149,7 @@
   </head>
 
   <body class="font-style">
-    <?php require_once ("layout/navbar.php"); ?>
+    <?php require_once ("navbar.php"); ?>
 
     <!-- Bagian Content -->
     <section class="pt-1 text-center container mb-3">
