@@ -1,7 +1,6 @@
 <?php 
-  
-
-
+  require_once '../controller/userController.php'; 
+  session_start();
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">
@@ -9,9 +8,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>VARK Test | Register Admin</title>
-    <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="bootstrap-icons-1.10.3/bootstrap-icons.css" />
-    <link rel="stylesheet" href="login.css" />
+    <link href="../bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../login.css" />
   </head>
 
   <body class="background">
@@ -23,11 +22,7 @@
           <h1 class="card-title text-center mb-2 login fw-bold">REGISTER ADMIN</h1>
           <p class="text-center mb-3">Silahkan Registrasi akun anda untuk dapat mengatur aplikasi</p>
 
-          <form action="index.php" method="POST">
-            <?php if (isset ($error)) : ?>
-              <p style="color: red; font-style: italic;">Username / Password Salah</p>
-            <?php endif;?>
-
+          <form action="" method="POST">
             <div class="input-group mb-2">
               <input type="text" class="form-control" placeholder="Username" name="username" />
               <div class="input-group-append">
@@ -82,12 +77,8 @@
               </div>
             </div>
 
-
-            <!-- <div class="input-group mb-3 justify-content-end">
-              <a href="register.php">Daftar Disini</a>
-            </div> -->
-
-            <p class="text-end mt-3">Sudah Punya akun? <a href="login.php">Login</a></p>
+            <p class="text-end mt-3"><a href="index.php">Kembali</a></p>
+            
             <div class=" input-group">
               <button type="submit" class="btn btn-primary justify-content-center panjang" name="register">Register</button>
             </div>
@@ -104,8 +95,32 @@
     </footer>
     <!-- Footer Selesai -->
 
-    <script src="bootstrap-5.2.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../bootstrap-5.2.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="bootstrap-5.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="../bootstrap-5.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['register'])) {
+    if (register_admin($_POST) > 0) {
+      $_SESSION["berhasil"] = "Registrasi Admin Berhasil!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } elseif(register($_POST) == 0) {
+      echo "
+          <script>
+              Swal.fire(
+                'Gagal!',
+                'Registrasi Admin Gagal!',
+                'error'
+            )
+          </script>
+      ";
+    }
+  }
+?>

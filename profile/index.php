@@ -26,14 +26,15 @@
         <h3><i class="bi bi-person-fill"></i> Data Diri dan Riwayat Tes</h3><hr>
 
         <form action="" method="post">
-            <input type="hidden" name="iduser" value="<?= $data['iduser']; ?>">
-            <input type="hidden" name="oldpassword" value="<?= $data['pwd']; ?>">
-            <input type="hidden" name="oldusername" value="<?= $data['username']; ?>">
+            <input type="hidden" name="iduser" value="<?= $user['iduser']; ?>">
+            <input type="hidden" name="oldpassword" value="<?= $user['pwd']; ?>">
+            <input type="hidden" name="oldusername" value="<?= $user['username']; ?>">
+            <input type="hidden" name="oldrole" value="<?= $user['role']; ?>">
             <div class="mb-3 row">
                 <label for="username" class="col-sm-2 col-form-label">Username</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" value="<?= $data['username']; ?>" name="username">
+                    <input type="text" class="form-control" id="username" value="<?= $user['username']; ?>" name="username">
                 </div>
             </div>
     
@@ -41,7 +42,7 @@
                 <label for="password" class="col-sm-2 col-form-label">Password</label>
     
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" value="<?= $data['pwd']; ?>">
+                    <input type="password" class="form-control" id="password" name="password" value="<?= $user['pwd']; ?>">
                 </div>
             </div>
             
@@ -49,7 +50,7 @@
                 <label for="password2" class="col-sm-2 col-form-label">Konfirmasi Passowrd</label>
     
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password2" name="password2" value="<?= $data['pwd']; ?>">
+                    <input type="password" class="form-control" id="password2" name="password2" value="<?= $user['pwd']; ?>">
                 </div>
             </div>
     
@@ -57,7 +58,7 @@
                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nama" value="<?= $data['nama']; ?>" name="nama">
+                    <input type="text" class="form-control" id="nama" value="<?= $user['nama']; ?>" name="nama">
                 </div>
             </div>
     
@@ -65,7 +66,7 @@
                 <label for="instansi" class="col-sm-2 col-form-label">Instansi</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="instansi" value="<?= $data['instansi']; ?>" name="instansi">
+                    <input type="text" class="form-control" id="instansi" value="<?= $user['instansi']; ?>" name="instansi">
                 </div>
             </div>
     
@@ -73,14 +74,13 @@
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
     
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" value="<?= $data['email']; ?>" name="email">
+                    <input type="email" class="form-control" id="email" value="<?= $user['email']; ?>" name="email">
                 </div>
             </div>
     
             <div class="mt-4">
                 <button type="submit" class="btn btn-success me-1" name="update">Ubah Data</button>
-                <a class="btn btn-danger me-1" id="delete" onclick="confirmDelete(<?= $data['iduser']; ?>)">Hapus Data</a>
-                <a href="" class="btn btn-secondary">Kembali</a>
+                <a class="btn btn-danger me-1" id="delete" onclick="confirmDelete(<?= $user['iduser']; ?>)">Hapus Data</a>
             </div>
         </form>
 
@@ -151,7 +151,7 @@
                         // Menampilkan pesan sukses jika data berhasil dihapus 
                         Swal.fire({
                             icon : 'success',
-                            title: 'Data User Belajar Berhasil Dihapus!',
+                            title: 'Data User Berhasil Dihapus!',
                             confirmButtonText: 'Ok',
                             }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */

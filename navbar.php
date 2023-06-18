@@ -3,7 +3,10 @@
 
     $id = dekripsi($_COOKIE['VRK21ZA']);
 
-    $data = query("SELECT * FROM user WHERE iduser = $id") [0];
+    $user = query("SELECT * FROM user WHERE iduser = $id") [0];
+
+    $nama = $user['nama'];
+    $kataPertama = explode(' ', $nama)[0];
 ?>
 
 <!-- Membuat Navbar -->
@@ -18,10 +21,10 @@
                 </li>
             </ul>
             <div class="btn-group">
-                <button type="button" class="btn btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white;">
-                    Selamat Datang <b><?= $data['nama']; ?></b>
+                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white;">
+                    Hi, <b><?= $kataPertama; ?></b>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
                     <li><a class="dropdown-item" href="profile">Profile dan Riwayat Tes</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="logout.php"><i class="bi bi-power"></i> Logout</a></li>

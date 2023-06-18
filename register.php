@@ -80,11 +80,6 @@
               </div>
             </div>
 
-
-            <!-- <div class="input-group mb-3 justify-content-end">
-              <a href="register.php">Daftar Disini</a>
-            </div> -->
-
             <p class="text-end mt-3">Sudah Punya akun? <a href="login.php">Login</a></p>
             <div class=" input-group">
               <button type="submit" class="btn btn-primary justify-content-center panjang" name="register">Register</button>
