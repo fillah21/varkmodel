@@ -24,7 +24,7 @@
                 <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white;">
                     Hi, <b><?= $kataPertama; ?></b>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                     <?php if($user['role'] == 'User') : ?>
                         <li><a class="dropdown-item" href="profile"><i class="bi bi-person-fill"></i> Profile & Riwayat Tes</a></li>
                         <li><hr class="dropdown-divider"></li>

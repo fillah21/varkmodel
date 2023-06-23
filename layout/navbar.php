@@ -24,13 +24,13 @@
                 <button type="button" class="btn btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white;">
                     Hi, <b><?= $kataPertama; ?></b>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                     <?php if($user['role'] == 'User') : ?>
                         <li><a class="dropdown-item" href=""><i class="bi bi-person-fill"></i> Profile & Riwayat Tes</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="../logout.php"><i class="bi bi-power"></i> Logout</a></li>
                     <?php elseif($user['role'] == 'Admin') :?>
-                        <li><a class="dropdown-item" href=""><i class="bi bi-person-fill"></i> Profile & Riwayat Tes</a></li>
+                        <li><a class="dropdown-item" href="..profile"><i class="bi bi-person-fill"></i> Profile & Riwayat Tes</a></li>
                         <li><a class="dropdown-item" href="../qna"> <i class="bi bi-bar-chart-steps"></i> Manajemen Pertanyaan & Jawaban</a></li>
                         <li><a class="dropdown-item" href="../model"><i class="bi bi-clipboard-data-fill"></i> Manajemen Model</a></li>
                         <li><a class="dropdown-item" href="../kriteria"><i class="bi bi-columns-gap"></i> Manajemen Kriteria</a></li>

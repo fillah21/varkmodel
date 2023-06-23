@@ -1,13 +1,40 @@
-<!doctype html>
 <?php 
-  // if(isset($_COOKIE['v']) || isset($_COOKIE['a']) || isset($_COOKIE['r']) || isset($_COOKIE['k']) || isset($_COOKIE['hasil'])) {
-  //   setcookie('v', '', time()-3600);
-  //   setcookie('a', '', time()-3600);
-  //   setcookie('r', '', time()-3600);
-  //   setcookie('k', '', time()-3600);
-  //   setcookie('hasil', '', time()-3600);
-  // }
+    require_once '../controller/jawabanController.php';
+    validasi_admin();
+
+    $id = dekripsi($_GET['id']);
+
+    $data = query("SELECT * FROM jawaban WHERE idjawaban = $id") [0];
+
+    $idpertanyaan = $data['idpertanyaan'];
+    $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
+
+    if(isset($_POST['submit'])) {
+        if (update_jawaban($_POST) > 0) {
+          session_start();
+    
+          $_SESSION["berhasil"] = "Data Jawaban Berhasil Diubah!";
+    
+          echo "
+              <script>
+                document.location.href='index.php';
+              </script>
+          ";
+        } else {
+          session_start();
+    
+          $_SESSION["gagal"] = "Data Jawaban Gagal Diubah!";
+    
+          echo "
+              <script>
+                document.location.href='index.php';
+              </script>
+          ";
+        }
+      }
 ?>
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -27,17 +54,13 @@
     <div class="container mt-3">
         <h3><i class="bi bi-bar-chart-steps"></i> Edit Data Jawaban</h3><hr>
 
-        <form action="">
+        <form action="" method="post">
+            <input type="hidden" name="idjawaban" value="<?= $data['idjawaban']; ?>">
             <div class="mb-3 row">
                 <label for="kode_pertanyaan" class="col-sm-2 col-form-label">Pertanyaan</label>
     
                 <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <input class="form-control" type="text" value="<?= $pertanyaan['pertanyaan']; ?>" aria-label="Disabled input example" readonly>
                 </div>
             </div>
 
@@ -45,7 +68,7 @@
                 <label for="jawaban" class="col-sm-2 col-form-label">Jawaban</label>
     
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="jawaban" name="jawaban" rows="10"></textarea>
+                    <textarea class="form-control" id="jawaban" name="jawaban" rows="10"><?= $data['jawaban']; ?></textarea>
                 </div>
             </div>
     
@@ -55,7 +78,7 @@
                 <label for="kode" class="col-sm-2 col-form-label">Kode</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="kode" value="" name="kode">
+                    <input type="text" class="form-control" id="kode" value="<?= $data['kode']; ?>" name="kode" readonly>
                 </div>
             </div>
     
@@ -63,13 +86,13 @@
                 <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
     
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="bobot" value="" name="bobot">
+                    <input type="number" class="form-control" id="bobot" value="<?= $data['bobot']; ?>" name="bobot" step="0.1" max="1">
                 </div>
             </div>
     
             <div class="mt-4">
-                <a href="" class="btn btn-success me-1">Edit Data</a>
-                <a href="" class="btn btn-secondary">Kembali</a>
+                <button name="submit" class="btn btn-success me-1">Ubah Data</button>
+                <a href="index.php" class="btn btn-secondary">Kembali</a>
             </div>
         </form>
     </div>

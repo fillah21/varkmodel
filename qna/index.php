@@ -7,7 +7,9 @@
     $pertanyaan = query("SELECT * FROM pertanyaan ORDER BY kode ASC");
     $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan");
 
-    $jawaban = query("SELECT * FROM jawaban ORDER BY kode ASC");
+    $per = query("SELECT * FROM pertanyaan WHERE idpertanyaan NOT IN (SELECT DISTINCT idpertanyaan FROM jawaban) ORDER BY kode ASC");
+
+    $jawaban = query("SELECT * FROM jawaban ORDER BY idpertanyaan DESC");
     $jumlah_jawaban = jumlah_data("SELECT * FROM jawaban");
 ?>
 <html lang="en">
@@ -71,7 +73,7 @@
                             
                                     <div class="">
                                         <select class="form-select" aria-label="Default select example" name="pertanyaan">
-                                            <?php foreach ($pertanyaan as $p) : ?>
+                                            <?php foreach ($per as $p) : ?>
                                                 <option value="<?= $p['idpertanyaan']; ?>"><?= $p['pertanyaan']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
@@ -98,6 +100,7 @@
                         <th>No</th>
                         <th>Pertanyaan</th>
                         <th>Kode</th>
+                        <th>Jumlah Jawaban</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -106,12 +109,28 @@
                     <?php 
                         foreach ($pertanyaan as $data) : 
                         $enkripsi = enkripsi($data['idpertanyaan']);
+                        $iddata = $data['idpertanyaan'];
+                        $jum = jumlah_data("SELECT * FROM jawaban WHERE idpertanyaan = $iddata");
+                        $model = jumlah_data("SELECT * FROM model");
                     ?>
                     <tr>
                         <td><?= $i; ?></td>
                         <td><?= $data['pertanyaan']; ?></td>
                         <td><?= $data['kode']; ?></td>
+                        <td><?= $jum; ?> dari <?= $model; ?> Jawaban</td>
                         <td>
+                            <?php
+                                if($jum > 0) : 
+                                    if($jum < $model) : 
+                            ?>
+                                <form action="create.php" method="post" class="d-inline">
+                                    <input type="hidden" name="idpertanyaan" value="<?= $data['idpertanyaan']; ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm">Pilih</button>
+                                </form>
+                            <?php 
+                                    endif;
+                                endif; 
+                            ?>
                             <a href="edit_pertanyaan.php?id=<?= $enkripsi; ?>" class="btn btn-success btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm" id="deletePertanyaan" onclick="deletePertanyaan(<?= $data['idpertanyaan']; ?>)">Hapus</button>
                         </td>
@@ -140,6 +159,7 @@
                     <?php 
                         $k = 1;
                         foreach ($jawaban as $j) :
+                        $enkripsi_jawaban = enkripsi($j['idjawaban']);
                      ?>
                         <tr>
                             <td><?= $k; ?></td>
@@ -152,8 +172,8 @@
                             <td><?= $j['kode']; ?></td>
                             <td><?= $j['bobot']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm">Edit</a>
-                                <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="edit_jawaban.php?id=<?= $enkripsi_jawaban; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <button class="btn btn-danger btn-sm" id="deleteJawaban" onclick="deleteJawaban(<?= $j['idjawaban']; ?>)">Hapus</button>
                             </td>
                         </tr>
                     <?php 
@@ -202,6 +222,55 @@
                         Swal.fire({
                             icon : 'success',
                             title: 'Data Pertanyaan Berhasil Dihapus!',
+                            confirmButtonText: 'Ok',
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.location.href='index.php';
+                            }
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                    // Menampilkan pesan error jika terjadi kesalahan dalam penghapusan data
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Terjadi kesalahan dalam menghapus data: ' + error,
+                            icon: 'error'
+                        });
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Menampilkan pesan jika tombol No diklik
+                    Swal.fire('Batal', 'Penghapusan data dibatalkan', 'info');
+                }
+            });
+        }
+
+        function deleteJawaban(id) {
+            // Menampilkan Sweet Alert dengan tombol Yes dan No
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                focusCancel: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Memanggil fungsi PHP menggunakan AJAX saat tombol Yes diklik
+                    $.ajax({
+                        url: '../controller/jawabanController.php',
+                        type: 'POST',
+                        data: {
+                        action: 'delete',
+                        id: id
+                    },
+                    success: function(response) {
+                        // Menampilkan pesan sukses jika data berhasil dihapus 
+                        Swal.fire({
+                            icon : 'success',
+                            title: 'Data Jawaban Berhasil Dihapus!',
                             confirmButtonText: 'Ok',
                             }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */

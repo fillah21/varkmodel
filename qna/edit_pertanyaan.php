@@ -1,6 +1,7 @@
 <!doctype html>
 <?php 
   require_once '../controller/pertanyaanController.php';
+  validasi_admin();
   $id = $_GET['id'];
 
   $dekripsi = dekripsi($id);

@@ -44,6 +44,7 @@
     
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="password" name="password" value="<?= $user['pwd']; ?>">
+                    <div id="emailHelp" class="form-text">*jika tidak ingin mengubah password, tidak perlu merubah form password dan konfirmasi password</div>
                 </div>
             </div>
             
