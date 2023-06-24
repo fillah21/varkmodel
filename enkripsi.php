@@ -1,7 +1,26 @@
 <?php 
     if(isset($_POST['submit'])) {
-        for($i = 0; $i < count($_POST['nama']); $i++ ) {
-            var_dump($_POST["nama"] [$i]);
+        // for($i = 0; $i < count($_POST['nama']); $i++ ) {
+        //     var_dump($_POST["nama"] [$i]);
+        // }
+        ini_set("SMTP", "smtp.gmail.com");
+        ini_set("smtp_port", "587");
+        
+        $to = "fillah.alhaqi11@gmail.com";
+        $subject = "Subjek Email";
+        $message = "Ini adalah pesan email.";
+
+        // Header email
+        $headers = "From: pengirim@example.com\r\n";
+        $headers .= "Reply-To: pengirim@example.com\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+        // Mengirim email
+        if (mail($to, $subject, $message, $headers)) {
+            echo "Email berhasil dikirim.";
+        } else {
+            echo "Gagal mengirim email.";
         }
     }
 ?>

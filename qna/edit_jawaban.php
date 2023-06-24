@@ -86,7 +86,7 @@
                 <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
     
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="bobot" value="<?= $data['bobot']; ?>" name="bobot" step="0.1" max="1">
+                    <input type="number" class="form-control" id="bobot" value="<?= $data['bobot']; ?>" name="bobot" step="0.01" max="1">
                 </div>
             </div>
     

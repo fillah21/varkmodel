@@ -98,7 +98,7 @@
                 <thead>
                     <tr class="text-center">
                         <th>No</th>
-                        <th>Pertanyaan</th>
+                        <th style="width: 700px;">Pertanyaan</th>
                         <th>Kode</th>
                         <th>Jumlah Jawaban</th>
                         <th>Aksi</th>

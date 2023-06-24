@@ -66,7 +66,7 @@
 
         <form action="" method="post">
             <div class="row">
-                <div class="col-md me-5">
+                <div class="col-lg me-5">
                     <?php foreach($model1 as $m1) : ?>
                         <input type="hidden" name="idpertanyaan[]" value="<?= $idpertanyaan; ?>">
                         <input type="hidden" name="idmodel[]" value="<?= $m1['idmodel']; ?>">
@@ -102,13 +102,13 @@
                             <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
                 
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.1" max="1">
+                                <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.01" max="1">
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
-                <div class="col-md">
+                <div class="col-lg">
                     <?php foreach($model2 as $m2) : ?>
                         <input type="hidden" name="idpertanyaan[]" value="<?= $idpertanyaan; ?>">
                         <input type="hidden" name="idmodel[]" value="<?= $m2['idmodel']; ?>">
