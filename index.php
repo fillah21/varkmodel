@@ -1,7 +1,8 @@
 <?php
-  require_once 'controller/userController.php';
-
+  require_once 'controller/mainController.php';
   validasi();
+
+  $model = query("SELECT * FROM model");
 ?>
 
 <!DOCTYPE html>
@@ -41,21 +42,11 @@
                 <div class="col-md-5 mt-3">
                     <p class="fs-4 text-white" style="text-align: justify;">VARK Model merupakan cara identifikasi empat gaya belajar utama yaitu:</p>
                     <ul class="text-white" style="font-size: 24px;">
-                      <li>
-                        <p style="text-align: justify;">Visual memiliki preferensi pada grafis, tabel, bagan sebagai representasi verbal daripada banyak kata</p>
-                      </li>
-
-                      <li>
-                        <p style="text-align: justify;">Auditory ditandai dengan preferensi untuk mendengar informasi dalam bentuk, rekaman audio, percakapan atau bertukar pendapat</p>
-                      </li>
-
-                      <li>
-                        <p style="text-align: justify;">Read/Write mencirikan orang yang lebih menyukai informasi dalam bentuk tertulis (buku, artikel) dan mereka menggunakan catatan dalam berbagai bentuk</p>
-                      </li>
-
-                      <li>
-                        <p style="text-align: justify;">Kinesthetic lebih menyukai contoh materi yang diajarkan untuk melihat hubungan dengan contoh nyata dan memiliki kecenderungan untuk bereksperimen</p>
-                      </li>
+                      <?php foreach($model as $m) : ?>
+                        <li>
+                          <p style="text-align: justify;"><?= $m['deskripsi']; ?></p>
+                        </li>
+                      <?php endforeach; ?>
                     </ul>
                 </div>
 

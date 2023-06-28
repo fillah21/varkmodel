@@ -50,7 +50,7 @@
                         <th>No</th>
                         <th>Model</th>
                         <th>Kode</th>
-                        <th>Deskripsi</th>
+                        <th style="width: 800px;">Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

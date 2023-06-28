@@ -1,19 +1,18 @@
 <?php
   require_once 'controller/hasilController.php';
   validasi();
-
+  if(isset($_POST['submit'])) {
+    forward_chaining($_POST);
+  }
   $jumlah_model = jumlah_data("SELECT * FROM model");
-
-  $data_pertanyaan = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model");
-
-  $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model");
+  $jumlah_pertanyaan = jumlah_pertanyaan();
 
   $jumlah_pertanyaan2 = ceil($jumlah_pertanyaan / 2);
   $jumlah_pertanyaan3 = $jumlah_pertanyaan - $jumlah_pertanyaan2;
 
 
-  $pertanyaan1 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model LIMIT $jumlah_pertanyaan2");
-  $pertanyaan2 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model LIMIT $jumlah_pertanyaan3 OFFSET $jumlah_pertanyaan2");
+  $pertanyaan1 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model ORDER BY kode ASC LIMIT $jumlah_pertanyaan2");
+  $pertanyaan2 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model ORDER BY kode ASC LIMIT $jumlah_pertanyaan3 OFFSET $jumlah_pertanyaan2");
 ?>
 
 
@@ -59,7 +58,7 @@
     </div>
 
     <!-- Daftar Pertanyaan -->
-    <form action="hasil.php" method="post">
+    <form action="" method="post">
       <!-- <input type="hidden" name="nama" value="">
       <input type="hidden" name="sekolah" value=""> -->
       <div class="container">
@@ -69,7 +68,7 @@
               $i = 1;
               foreach($pertanyaan1 as $p1) : 
             ?>
-              <div class="mb-4">
+              <div class="mb-5">
                 <label for="rolename" class="form-label"><?= $i . " " . $p1['pertanyaan']; ?></label>
                 <?php 
                   $idpertanyaan = $p1['idpertanyaan'];
@@ -92,7 +91,7 @@
             <?php 
               foreach($pertanyaan2 as $p2) : 
             ?>
-              <div class="mb-4">
+              <div class="mb-5">
                 <label for="rolename" class="form-label"><?= $i . " " . $p2['pertanyaan']; ?></label>
                 <?php 
                   $idpertanyaan = $p2['idpertanyaan'];
