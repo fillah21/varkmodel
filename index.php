@@ -14,6 +14,7 @@
     <link href="style.css" rel="stylesheet">
     <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <link rel="Icon" href="img/Logo.png">
 </head>
 <body>
     <?php 

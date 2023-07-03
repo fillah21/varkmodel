@@ -2,7 +2,7 @@
   require_once 'controller/hasilController.php';
   validasi();
   if(isset($_POST['submit'])) {
-    forward_chaining($_POST);
+    hitung($_POST);
   }
   $jumlah_model = jumlah_data("SELECT * FROM model");
   $jumlah_pertanyaan = jumlah_pertanyaan();
@@ -25,6 +25,7 @@
     <link href="style.css" rel="stylesheet">
     <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <link rel="Icon" href="img/Logo.png">
   </head>
 
   <body class="font-style">

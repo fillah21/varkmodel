@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="login.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="Icon" href="img/Logo.png">
   </head>
 
   <body class="background">
@@ -34,7 +35,9 @@
 
           <form action="" method="POST">
             <?php if (isset ($error)) : ?>
-              <p style="color: red; font-style: italic;">Username / Password Salah</p>
+              <div class="alert alert-danger" role="alert">
+                Username/Password Salah
+              </div>
             <?php endif;?>
 
             <div class="input-group mb-3">
