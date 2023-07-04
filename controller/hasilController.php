@@ -11,10 +11,22 @@
 
     function hitung($data) {
       $jumlah_pertanyaan = jumlah_pertanyaan();
+      $model = query("SELECT * FROM model");
+
+      foreach($model as $m) {
+        $kodeModel = $m['kode'];
+    
+        $huruf_model = substr($kodeModel, 0, 1);
+        $kode_model[] = $huruf_model;
+      }
 
       // Bagian Forward Chaining
       for ($i = 1; $i <= $jumlah_pertanyaan; $i++) {
         $inputName = 'P' . $i;
+
+        foreach($kode_model as $q) {
+          ${$q . $i} = 0;
+        }
 
         if (isset($data[$inputName])) {
           $inputValue = $data[$inputName];
@@ -22,53 +34,28 @@
           $data_jawaban = query("SELECT * FROM jawaban WHERE kode = '$inputValue'")[0];
           $first_code = substr($data_jawaban['kode'],0, 1);
 
-          if($first_code == "V") {
-            ${"v" . $i} = $data_jawaban['bobot'];
-            ${"a" . $i} = 0;
-            ${"r" . $i} = 0;
-            ${"k" . $i} = 0;
-          } elseif($first_code == "A") {
-            ${"v" . $i} = 0;
-            ${"a" . $i} = $data_jawaban['bobot'];
-            ${"r" . $i} = 0;
-            ${"k" . $i} = 0;
-          } elseif($first_code == "R") {
-            ${"v" . $i} = 0;
-            ${"a" . $i} = 0;
-            ${"r" . $i} = $data_jawaban['bobot'];
-            ${"k" . $i} = 0;
-          } elseif($first_code == "K") {
-            ${"v" . $i} = 0;
-            ${"a" . $i} = 0;
-            ${"r" . $i} = 0;
-            ${"k" . $i} = $data_jawaban['bobot'];
+          foreach($kode_model as $mod) {
+            if($first_code == $mod) {
+              ${$mod . $i} = $data_jawaban['bobot'];
+            }
+
+            echo "Bobot dari " . $mod . $i ." adalah " . ${$mod . $i} . "<br>";
           }
 
-          $cf_user_v[] = ${"v" . $i};
-          $cf_user_a[] = ${"a" . $i};
-          $cf_user_r[] = ${"r" . $i};
-          $cf_user_k[] = ${"k" . $i};
-
-          echo "Bobot dari v" . $i ."adalah " . ${"v" . $i} . "<br>";
-          echo "Bobot dari a" . $i ."adalah " . ${"a" . $i} . "<br>";
-          echo "Bobot dari r" . $i ."adalah " . ${"r" . $i} . "<br>";
-          echo "Bobot dari k" . $i ."adalah " . ${"k" . $i} . "<br>";
           echo "Dari pertanyaan " . $inputName . " jawabannya " . $inputValue . " dan bobotnya " . $data_jawaban['bobot'] . "<br><br>";
-
         }
       }
+
+      foreach($kode_model as $mo) {
+        for ($l = 1; $l <= $jumlah_pertanyaan; $l++) {
+          ${"cf_user_" . $mo}[] = ${$mo . $l};
+        }
+      }
+
       // Forward Chaining Selesai
 
       // Bagian Certainty Factor
         // Ambil seluruh CF Pakar dari setiap model belajar
-          $model = query("SELECT * FROM model");
-          foreach($model as $m) {
-            $kodeModel = $m['kode'];
-    
-            $huruf_model = substr($kodeModel, 0, 1);
-            $kode_model[] = $huruf_model;
-          }
-
           foreach($kode_model as $km) {
             $sqlJawaban = query("SELECT * FROM jawaban WHERE kode LIKE '$km%' ORDER BY kode ASC");
             $jumlahSql = jumlah_data("SELECT * FROM jawaban WHERE kode LIKE '$km%' ORDER BY kode ASC");
@@ -78,6 +65,40 @@
             }
           }
         // Ambil CF Pakar Selesai
+        
+
+        // Hitung CF HE dari setiap model belajar
+          foreach($kode_model as $md) {
+            for($k = 0; $k < count(${"cf_user_" . $md}); $k++) {
+              $angka = $k + 1;
+              ${"cf_he_" . $md . $angka} = ${"cf_user_" . $md}[$k] * ${"cf_pakar_" . $md}[$k];
+
+              echo "Hasil CF HE " . $md . $angka . " dari " . ${"cf_user_" . $md}[$k] . " dikali " . ${"cf_pakar_" . $md}[$k] . " Adalah " . ${"cf_he_" . $md . $angka} . "<br>";
+            }
+            echo "<br>";
+          }
+        // Hitung CF HE selesai
+
+        // Hitung CF Combine dari setiap model
+        foreach($kode_model as $komo) {
+          ${"cf_old_" . $komo . 0} = ${"cf_he_" . $komo . 1};
+
+          for($n = 1; $n < $jumlah_pertanyaan; $n++) {
+            ${"cf_old_" . $komo . $n} = ${"cf_old_" . $komo . $n - 1} + ${"cf_he_" . $komo . $n + 1} * (1 - ${"cf_old_" . $komo . $n - 1});
+
+            ${"cf_old_" . $komo}[] = ${"cf_old_" . $komo . $n} * 100;
+            echo "Hasil CF OLD ". $komo . $n . " dari perkalian " . ${"cf_old_" . $komo . $n - 1} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n - 1} . ") adalah " . ${"cf_old_" . $komo . $n} . "<br>";
+          }
+          ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[0];
+
+          for ($o = 1; $o < count(${"cf_old_" . $komo}); $o++) {
+            if (${"cf_old_" . $komo}[$o] > ${"nilai_terbesar_" . $komo}) {
+              ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[$o];
+            }
+          }
+          echo "Nilai terbesar dari " . $komo . " adalah ". ${"nilai_terbesar_" . $komo} . "%<br><br>";
+        }
+        // Hitung CF Combine Selesai
 
       
 
