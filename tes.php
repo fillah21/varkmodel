@@ -2,8 +2,21 @@
   require_once 'controller/hasilController.php';
   validasi();
   if(isset($_POST['submit'])) {
-    hitung($_POST);
+    if (hitung($_POST) > 0) {
+      echo "
+          <script>
+            document.location.href='hasil.php';
+          </script>
+      ";
+    } else {
+      echo "
+          <script>
+            document.location.href='tes.php';
+          </script>
+      ";
+    }
   }
+  
   $jumlah_model = jumlah_data("SELECT * FROM model");
   $jumlah_pertanyaan = jumlah_pertanyaan();
 

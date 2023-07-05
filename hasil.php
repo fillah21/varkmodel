@@ -1,35 +1,17 @@
 <?php 
-  // if(isset($_COOKIE['hasil'])) {
-  //   $nama = $_COOKIE['nama'];
-  //   $sekolah = $_COOKIE['sekolah'];
-  //   $hasil = $_COOKIE['hasil'];
-  //   $v = $_COOKIE['v'];
-  //   $a = $_COOKIE['a'];
-  //   $r = $_COOKIE['r'];
-  //   $k = $_COOKIE['k'];
-  // } else {
-  //   echo "<script>
-  //           alert('Silahkan lakukan tes terlebih dahulu');
-  //           document.location.href='index.php';
-  //         </script>";
-  //   exit;
-  // }
+  require_once 'controller/hasilController.php';
+  validasi();
+  $id = dekripsi($_COOKIE['VRK21ZA']);
 
-  // $ada_hasil = false;
-  
-  // if($v > $a && $v > $r && $v > $k) {
-  //   $result = "VISUAL";
-  //   $ada_hasil = true;
-  // } elseif ($a > $v && $a > $r && $a > $k) {
-  //   $result = "AUDITORY";
-  //   $ada_hasil = true;
-  // } elseif ($r > $v && $r > $a && $r > $k) {
-  //   $result = "READ / WRITE";
-  //   $ada_hasil = true;
-  // } elseif ($k > $v && $k > $r && $k > $a) {
-  //   $result = "KINESTHETIC";
-  //   $ada_hasil = true;
-  // }
+  if(isset($_GET['id'])) {
+    $idhasil = dekripsi($_GET['id']);
+
+    $data = query("SELECT * FROM hasil WHERE idhasil = $idhasil") [0];
+    $hasil = hasil($data);
+  } else {
+    $data = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
+    $hasil = hasil($data);
+  }
 ?>
 
 
@@ -54,8 +36,8 @@
       <section class="text-center container">
         <div class="row pt-lg-5">
           <div class="col-md mx-auto">
-            <h3 class="fw-bold">Selamat Fillah Zaki Alhaqi, gaya belajar anda adalah :</h3>
-            <h1 class="fw-bold my-5" style="font-size: 60px;">Visual</h1>
+            <h3 class="fw-bold">Selamat <?= $nama; ?>, gaya belajar anda adalah :</h3>
+            <h1 class="fw-bold my-5" style="font-size: 60px;"><?= $hasil; ?></h1>
             <h4>Dengan kesimpulan sebagai berikut :</h4>
           </div>
         </div>
@@ -64,10 +46,10 @@
       <div class="container">
         <h3 class="text-center mt-5">Hasil tes :</h3>
         <ul class="list-inline text-center fs-4">
-          <li class="list-inline-item">Visual : 80%</li>
-          <li class="list-inline-item mx-3">Auditory : 10%</li>
-          <li class="list-inline-item me-3">Read/Write : 5%</li>
-          <li class="list-inline-item pb-4">Kinesthetic : 5%</li>
+          <li class="list-inline-item">Visual : <?= $data['v']; ?>%</li>
+          <li class="list-inline-item mx-3">Auditory : <?= $data['a']; ?>%</li>
+          <li class="list-inline-item me-3">Read/Write : <?= $data['r']; ?>%</li>
+          <li class="list-inline-item pb-4">Kinesthetic : <?= $data['k']; ?>%</li>
         </ul>
       </div>
     </div>

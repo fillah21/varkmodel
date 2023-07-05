@@ -10,6 +10,7 @@
     }
 
     function hitung($data) {
+      global $conn;
       $jumlah_pertanyaan = jumlah_pertanyaan();
       $model = query("SELECT * FROM model");
 
@@ -39,10 +40,10 @@
               ${$mod . $i} = $data_jawaban['bobot'];
             }
 
-            echo "Bobot dari " . $mod . $i ." adalah " . ${$mod . $i} . "<br>";
+            // echo "Bobot dari " . $mod . $i ." adalah " . ${$mod . $i} . "<br>";
           }
 
-          echo "Dari pertanyaan " . $inputName . " jawabannya " . $inputValue . " dan bobotnya " . $data_jawaban['bobot'] . "<br><br>";
+          // echo "Dari pertanyaan " . $inputName . " jawabannya " . $inputValue . " dan bobotnya " . $data_jawaban['bobot'] . "<br><br>";
         }
       }
 
@@ -69,11 +70,11 @@
 
         // Hitung CF HE dari setiap model belajar
           foreach($kode_model as $md) {
-            for($k = 0; $k < count(${"cf_user_" . $md}); $k++) {
-              $angka = $k + 1;
-              ${"cf_he_" . $md . $angka} = ${"cf_user_" . $md}[$k] * ${"cf_pakar_" . $md}[$k];
+            for($ko = 0; $ko < count(${"cf_user_" . $md}); $ko++) {
+              $angka = $ko + 1;
+              ${"cf_he_" . $md . $angka} = ${"cf_user_" . $md}[$ko] * ${"cf_pakar_" . $md}[$ko];
 
-              echo "Hasil CF HE " . $md . $angka . " dari " . ${"cf_user_" . $md}[$k] . " dikali " . ${"cf_pakar_" . $md}[$k] . " Adalah " . ${"cf_he_" . $md . $angka} . "<br>";
+              // echo "Hasil CF HE " . $md . $angka . " dari " . ${"cf_user_" . $md}[$ko] . " dikali " . ${"cf_pakar_" . $md}[$ko] . " Adalah " . ${"cf_he_" . $md . $angka} . "<br>";
             }
             echo "<br>";
           }
@@ -87,7 +88,7 @@
             ${"cf_old_" . $komo . $n} = ${"cf_old_" . $komo . $n - 1} + ${"cf_he_" . $komo . $n + 1} * (1 - ${"cf_old_" . $komo . $n - 1});
 
             ${"cf_old_" . $komo}[] = ${"cf_old_" . $komo . $n} * 100;
-            echo "Hasil CF OLD ". $komo . $n . " dari perkalian " . ${"cf_old_" . $komo . $n - 1} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n - 1} . ") adalah " . ${"cf_old_" . $komo . $n} . "<br>";
+            // echo "Hasil CF OLD ". $komo . $n . " dari perkalian " . ${"cf_old_" . $komo . $n - 1} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n - 1} . ") adalah " . ${"cf_old_" . $komo . $n} . "<br>";
           }
           ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[0];
 
@@ -96,18 +97,44 @@
               ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[$o];
             }
           }
-          echo "Nilai terbesar dari " . $komo . " adalah ". ${"nilai_terbesar_" . $komo} . "%<br><br>";
+          // echo "Nilai terbesar dari " . $komo . " adalah ". ${"nilai_terbesar_" . $komo} . "%<br><br>";
         }
         // Hitung CF Combine Selesai
-
-      
-
-      
-
       // Certainty Factor Selesai
+
+      $iduser = dekripsi($_COOKIE['VRK21ZA']);
+      $v = $nilai_terbesar_V;
+      $a = $nilai_terbesar_A;
+      $r = $nilai_terbesar_R;
+      $k = $nilai_terbesar_K;
+
+      $query = "INSERT INTO hasil
+                    VALUES
+                    (NULL, '$iduser', '$v', '$a', '$r', '$k', CURRENT_TIMESTAMP())";
+        
+      mysqli_query($conn, $query);
+
+      return mysqli_affected_rows($conn);
     }
 
-    // function certainty_factor($data) {
+    function hasil($data) {
+      $v = $data['v'];
+      $a = $data['a'];
+      $r = $data['r'];
+      $k = $data['k'];
 
-    // }
+      if ($v > $a && $v > $r && $v > $k) {
+          $hasil = 'Visual';
+      } elseif ($a > $v && $a > $r && $a > $k) {
+          $hasil = 'Auditory';
+      } elseif ($r > $v && $r > $a && $r > $k) {
+          $hasil = 'Read/Write';
+      } elseif ($k > $v && $k > $a && $k > $r) {
+          $hasil = 'Kinesthetic';
+      } else {
+          $hasil = 'Terdapat nilai yang sama atau tidak valid';
+      }
+
+      return $hasil;
+    }
 ?>

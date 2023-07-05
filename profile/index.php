@@ -1,6 +1,11 @@
 <?php 
     require_once '../controller/userController.php';
+    require_once '../controller/hasilController.php';
     validasi();
+
+    $iduser = dekripsi($_COOKIE['VRK21ZA']);
+    $hasil = query("SELECT * FROM hasil WHERE iduser = $iduser");
+    setlocale(LC_TIME, 'id_ID');  // Mengatur lokal ke bahasa Indonesia
 ?>
 
 <!doctype html>
@@ -100,22 +105,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>10:34:21 / 21 November 2022</td>
-                        <td>Visual</td>
-                        <td>
-                            <a href="" class="btn btn-primary btn-sm">Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>10:34:21 / 22 November 2022</td>
-                        <td>Visual</td>
-                        <td>
-                            <a href="" class="btn btn-primary btn-sm">Detail</a>
-                        </td>
-                    </tr>
+                    <?php 
+                        $i = 1;
+                        foreach ($hasil as $h) :
+                            $waktu_tes = strftime('%H:%M:%S / %d %B %Y', strtotime($h['tanggal_tes']));
+                            $hasil = hasil($h);
+                            $idhasil = enkripsi($h['idhasil'])
+                     ?>
+                        <tr>
+                            <td><?= $i; ?></td>
+                            <td><?= $waktu_tes; ?></td>
+                            <td><?= $hasil; ?></td>
+                            <td>
+                                <a href="../hasil.php?id=<?= $idhasil; ?>" class="btn btn-primary btn-sm">Detail</a>
+                            </td>
+                        </tr>
+                    <?php 
+                        $i++;
+                        endforeach;
+                    ?>
                 </tbody>
             </table>
         </div>

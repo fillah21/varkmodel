@@ -48,3 +48,15 @@ CREATE TABLE `user` (
     `email` varchar(100) NOT NULL,
     `role` varchar(10) NOT NULL
 );
+
+CREATE TABLE `hasil` (
+    `idhasil` int(11) primary key auto_increment,
+    `iduser` int(11) NOT NULL,
+    `v` double NOT NULL,
+    `a` double NOT NULL,
+    `r` double NOT NULL,
+    `k` double NOT NULL,
+    `tanggal_tes` timestamp NOT NULL,
+
+    foreign key(iduser) references user(iduser) ON DELETE CASCADE ON UPDATE CASCADE
+);
