@@ -12,6 +12,14 @@
     $data = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
     $hasil = hasil($data);
   }
+
+  if(isset($hasil)) {
+    $model = query("SELECT * FROM model WHERE model = '$hasil'") [0];
+
+    $idmodel = $model['idmodel'];
+
+    $data_hasil = query("SELECT * FROM rekomendasi WHERE idmodel = $idmodel");
+  }
 ?>
 
 
@@ -57,72 +65,42 @@
 
     <div class="container">
       <h2 class="text-center mt-5">Rekomendasi Cara Belajar :</h2>
-      <ul class="nav nav-tabs " role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active text-dark" data-bs-toggle="tab" href="#v">Visual</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" data-bs-toggle="tab" href="#a">Auditory</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" data-bs-toggle="tab" href="#r">Read/Write</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" data-bs-toggle="tab" href="#k">Kinesthetic</a>
-        </li>
-      </ul>
 
-      <div class="tab-content">
-        <div id="v" class="tab-pane active fs-5">
-          <p class="mt-3" style="text-align: justify; text-indent: 0.5in;">Visual memiliki preferensi pada grafis, tabel, bagan sebagai representasi verbal daripada banyak kata. Visual lebih cenderung menangkap informasi dari apa yang mereka lihat (berbentuk bagan, grafik, tabel, dan lain-lain), dan merepresentasikannya ke dalam sebuah objek visual seperti grafik, power point, bagan, dan lain-lain.</p>
-          <p>Rekomendasi cara belajar yang cocok untuk para Visual adalah : </p>
-
-          <ul>
-            <li>Belajar dengan melihat sesuatu yang menarik mata seperti bagan, grafik, dan lain-lain</li>
-            <li>Membuat peta konsep atau semacamnya untuk merangkum dan menghubungkan informasi yang didapat</li>
-            <li>Melihat presentasi yang slide nya terlihat interaktif dan menarik</li>
-            <li>Melihat video tutorial berbentuk presentasi yang menarik</li>
-          </ul>
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              Pengertian <?= $hasil; ?>
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <p class="mt-3 fs-5" style="text-align: justify; text-indent: 0.5in;"><?= $model['deskripsi']; ?></p>
+            </div>
+          </div>
         </div>
-
-        <div id="a" class="tab-pane fade fs-5">
-          <p class="mt-3" style="text-align: justify; text-indent: 0.5in;">Auditory ditandai dengan preferensi untuk mendengar informasi dalam bentuk rekaman audio, percakapan, atau bertukar pendapat. Auditory biasanya orang yang komunikatif karena untuk mendapatkan informasi mereka sangat suka berdiskusi.</p>
-          <p>Rekomendasi cara belajar yang cocok untuk para Auditory adalah : </p>
-
-          <ul>
-            <li>Belajar dengan mendengarkan pendapat, rekaman audio pembelajaran, atau berdiskusi</li>
-            <li>Mengulang informasi dengan cara berbicara dengan diri sendiri maupun orang lain agar informasi dapat diingat dengan baik</li>
-            <li>Mendengarkan talk show, seminar, atau semacamnya untuk mendapatkan informasi</li>
-            <li>Sering berdiskusi dengan orang lain</li>
-          </ul>
-        </div>
-
-        <div id="r" class="tab-pane fade fs-5">
-          <p class="mt-3" style="text-align: justify; text-indent: 0.5in;">Read/Write mencirikan orang yang lebih menyukai informasi dalam bentuk tertulis (buku, artikel) dan mereka menggunakan catatan dalam berbagai bentuk untuk merekam informasi tersebut.</p>
-          <p>Rekomendasi cara belajar yang cocok untuk para Read/Write adalah : </p>
-
-          <ul>
-            <li>Belajar dengan membaca tulisan. Dapat berupa buku, artikel, jurnal, dan lain-lain</li>
-            <li>Mengulang informasi dengan cara membaca ulang informasi yang didapat atau menulis informasi tersebut kedalam sebuah catatan kecil</li>
-            <li>Menerima informasi secara tertulis</li>
-          </ul>
-        </div>
-
-        <div id="k" class="tab-pane fade fs-5">
-          <p class="mt-3" style="text-align: justify; text-indent: 0.5in;">Kinesthetic lebih menyukai contoh materi yang diajarkan untuk melihat hubungan dengan contoh nyata dan memiliki kecenderungan untuk bereksperimen. Kinesthetic lebih menyukai untuk melihat orang melakukan sesuatu dan akhirnya dia sendiri mencoba melakukan hal tersebut.</p>
-          <p>Rekomendasi cara belajar yang cocok untuk para Kinesthetic adalah : </p>
-
-          <ul>
-            <li>Belajar dengan melihat contoh jadi atau seseorang melakukan sesuatu</li>
-            <li>Mencoba hal secara langsung dan belajar dari kesalahan</li>
-            <li>Mengulang informasi yang didapat dengan gerakan yang dapat membantu mengingat informasi tersebut</li>
-          </ul>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Rekomendasi belajar yang cocok untuk para <?= $hasil; ?>
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <ul>
+                <?php foreach ($data_hasil as $dh) :?>
+                  <li class="fs-5"><?= $dh['rekomendasi']; ?></li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="justify-content-center d-flex mb-5">
-        <a href="" class="btn btn-success me-3">Cetak Hasil</a>
-        <a href="" class="btn btn-secondary">Kembali</a>
+        <a href="print.php" class="btn btn-success me-3" target="_blank">Cetak Hasil</a>
+        <a href="index.php" class="btn btn-secondary">Kembali</a>
       </div>
     </div>
     <!-- Bagian Content Selesai -->

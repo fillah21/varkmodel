@@ -50,13 +50,16 @@
             </div>
 
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" name="password" />
+              <input type="password" class="form-control" placeholder="Password" name="password" id="password"/>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="bi bi-lock-fill"></i>
                 </div>
               </div>
             </div>
+
+            <input type="checkbox" id="show-password">
+            <label for="show-password">Tampilkan password</label>
 
             <div class="input-group mb-3 justify-content-end">
               <a href="register.php">Daftar Disini</a>
@@ -80,6 +83,14 @@
     <script src="bootstrap-5.2.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="bootstrap-5.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script>
+      const passwordInput = document.getElementById('password');
+      const showPasswordCheckbox = document.getElementById('show-password');
+
+      showPasswordCheckbox.addEventListener('change', function() {
+        passwordInput.type = this.checked ? 'text' : 'password';
+      });
+    </script>
   </body>
 </html>
 
