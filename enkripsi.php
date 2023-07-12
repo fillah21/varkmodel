@@ -28,7 +28,7 @@
 
 
 
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -46,4 +46,48 @@
         <button name="submit">Submit</button>
     </form>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h2>Tabel Contoh</h2>
+  
+  <table>
+    <tr>
+      <th>Nama</th>
+      <th>Usia</th>
+      <th>Kota</th>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>30</td>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>25</td>
+      <td>London</td>
+    </tr>
+  </table>
+  
+</body>
 </html>

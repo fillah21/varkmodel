@@ -13,12 +13,17 @@
     $hasil = hasil($data);
   }
 
-  if(isset($hasil)) {
+  if($hasil != false) {
+    $idhasil_enkripsi = enkripsi($data['idhasil']);
+    
     $model = query("SELECT * FROM model WHERE model = '$hasil'") [0];
 
     $idmodel = $model['idmodel'];
 
     $data_hasil = query("SELECT * FROM rekomendasi WHERE idmodel = $idmodel");
+  } else {
+    $idhasil_enkripsi = enkripsi($data['idhasil']);
+    header("Location: tes2.php?id=" . $idhasil_enkripsi);
   }
 ?>
 
@@ -99,7 +104,7 @@
       </div>
 
       <div class="justify-content-center d-flex mb-5">
-        <a href="print.php" class="btn btn-success me-3" target="_blank">Cetak Hasil</a>
+        <a href="print.php?id=<?= $idhasil_enkripsi; ?>" class="btn btn-success me-3" target="_blank">Cetak Hasil</a>
         <a href="index.php" class="btn btn-secondary">Kembali</a>
       </div>
     </div>

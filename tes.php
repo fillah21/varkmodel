@@ -24,8 +24,8 @@
   $jumlah_pertanyaan3 = $jumlah_pertanyaan - $jumlah_pertanyaan2;
 
 
-  $pertanyaan1 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model ORDER BY kode ASC LIMIT $jumlah_pertanyaan2");
-  $pertanyaan2 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model ORDER BY kode ASC LIMIT $jumlah_pertanyaan3 OFFSET $jumlah_pertanyaan2");
+  $pertanyaan1 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY kode ASC LIMIT $jumlah_pertanyaan2");
+  $pertanyaan2 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY kode ASC LIMIT $jumlah_pertanyaan3 OFFSET $jumlah_pertanyaan2");
 ?>
 
 
