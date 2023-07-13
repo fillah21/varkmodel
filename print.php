@@ -145,5 +145,6 @@ echo '<embed src="' . $pdfDataUri . '" type="application/pdf" width="100%" heigh
 <html lang="en">
 <head>
     <title>Hasil Tes</title>
+    <link rel="Icon" href="img/Logo.png">
 </head>
 </html>

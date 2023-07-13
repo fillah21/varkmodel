@@ -1,5 +1,5 @@
-<!doctype html>
 <?php 
+  session_start();
   require_once '../controller/modelController.php';
   validasi_admin();
 
@@ -8,31 +8,10 @@
   $dekripsi = dekripsi($id);
 
   $data = query("SELECT * FROM model WHERE idmodel = $dekripsi") [0];
-
-  if(isset($_POST['submit'])) {
-    if (update($_POST) > 0) {
-      session_start();
-
-      $_SESSION["berhasil"] = "Data Model Berhasil Diubah!";
-
-      echo "
-          <script>
-            document.location.href='index.php';
-          </script>
-      ";
-    } else {
-      session_start();
-
-      $_SESSION["gagal"] = "Data Model Gagal Diubah!";
-
-      echo "
-          <script>
-            document.location.href='index.php';
-          </script>
-      ";
-    }
-  }
 ?>
+
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -41,6 +20,8 @@
     <link href="../style.css" rel="stylesheet">
     <link href="../bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="../img/Logo.png">
   </head>
 
@@ -55,6 +36,8 @@
 
         <form action="" method="POST">
             <input type="hidden" name="idmodel" value="<?= $data['idmodel']; ?>">
+            <input type="hidden" name="oldmodel" value="<?= $data['model']; ?>">
+            <input type="hidden" name="oldkode" value="<?= $data['kode']; ?>">
             <div class="mb-3 row">
                 <label for="model" class="col-sm-2 col-form-label">Model</label>
     
@@ -90,3 +73,27 @@
     <script src="../bootstrap-5.2.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['submit'])) {
+    if (update($_POST) > 0) {
+      update_field($_POST);
+
+      $_SESSION["berhasil"] = "Data Model Berhasil Diubah!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } else {
+      $_SESSION["gagal"] = "Data Model Gagal Diubah!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    }
+  }
+?>

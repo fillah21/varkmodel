@@ -119,7 +119,7 @@
 
       $query = "INSERT INTO hasil
                     VALUES
-                    (NULL, '$iduser', '$v', '$a', '$r', '$k', CURRENT_TIMESTAMP())";
+                    (NULL, '$iduser', CURRENT_TIMESTAMP(), '$v', '$a', '$r', '$k')";
         
       mysqli_query($conn, $query);
 

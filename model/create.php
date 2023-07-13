@@ -1,30 +1,7 @@
 <?php 
+  session_start();
   require_once '../controller/modelController.php';
   validasi_admin();
-
-  if(isset($_POST['submit'])) {
-    if (create($_POST) > 0) {
-      session_start();
-
-      $_SESSION["berhasil"] = "Data Model Berhasil Ditambahkan!";
-
-      echo "
-          <script>
-            document.location.href='index.php';
-          </script>
-      ";
-    } else {
-      session_start();
-
-      $_SESSION["gagal"] = "Data Model Gagal Ditambahkan!";
-
-      echo "
-          <script>
-            document.location.href='index.php';
-          </script>
-      ";
-    }
-  }
 
 ?>
 
@@ -38,6 +15,8 @@
     <link href="../style.css" rel="stylesheet">
     <link href="../bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="../img/Logo.png">
   </head>
 
@@ -86,3 +65,27 @@
     <script src="../bootstrap-5.2.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['submit'])) {
+    if (create($_POST) > 0) {
+      create_field($_POST);
+
+      $_SESSION["berhasil"] = "Data Model Berhasil Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } else {
+      $_SESSION["gagal"] = "Data Model Gagal Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    }
+  }
+?>
