@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <div class="justify-content-center d-flex mb-5">
+      <div class="justify-content-center d-flex my-5">
         <a href="print.php?id=<?= $idhasil_enkripsi; ?>" class="btn btn-success me-3" target="_blank">Cetak Hasil</a>
         <a href="index.php" class="btn btn-secondary">Kembali</a>
       </div>

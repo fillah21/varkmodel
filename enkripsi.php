@@ -1,34 +1,32 @@
 <?php 
-    if(isset($_POST['submit'])) {
-        // for($i = 0; $i < count($_POST['nama']); $i++ ) {
-        //     var_dump($_POST["nama"] [$i]);
-        // }
-        ini_set("SMTP", "smtp.gmail.com");
-        ini_set("smtp_port", "587");
-        
-        $to = "fillah.alhaqi11@gmail.com";
-        $subject = "Subjek Email";
-        $message = "Ini adalah pesan email.";
+  require_once 'controller/mainController.php';
+  if(isset($_POST['submit'])) {
+    $iduser = 1;
+    $tanggal_tes = "Ehem";
+    $sql_data = "INSERT INTO hasil VALUES (NULL, $iduser, $tanggal_tes, ";
 
-        // Header email
-        $headers = "From: pengirim@example.com\r\n";
-        $headers .= "Reply-To: pengirim@example.com\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    $model = query("SELECT * FROM model");
 
-        // Mengirim email
-        if (mail($to, $subject, $message, $headers)) {
-            echo "Email berhasil dikirim.";
-        } else {
-            echo "Gagal mengirim email.";
-        }
+    foreach ($model as $mod) {
+      $kecil[] = strtolower($mod['kode']);
     }
+
+    foreach ($kecil as $k) {
+      $value[] = "Ini" . $k;
+    }
+
+    $valuesString = implode(", ", $value);
+
+    $sql_data .= $valuesString . ")";
+
+    var_dump($sql_data);
+  }
 ?>
 
 
 
 
-<!-- <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -46,48 +44,4 @@
         <button name="submit">Submit</button>
     </form>
   </body>
-</html> -->
-
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-  </style>
-</head>
-<body>
-  <h2>Tabel Contoh</h2>
-  
-  <table>
-    <tr>
-      <th>Nama</th>
-      <th>Usia</th>
-      <th>Kota</th>
-    </tr>
-    <tr>
-      <td>John Doe</td>
-      <td>30</td>
-      <td>New York</td>
-    </tr>
-    <tr>
-      <td>Jane Smith</td>
-      <td>25</td>
-      <td>London</td>
-    </tr>
-  </table>
-  
-</body>
 </html>

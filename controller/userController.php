@@ -40,7 +40,7 @@
         $password = password_hash($password2, PASSWORD_DEFAULT);
         
         //jika password sama, masukkan data ke database
-        mysqli_query($conn, "INSERT INTO user VALUES ('', '$username', '$password', '$nama', '$instansi', '$email', '$role')");
+        mysqli_query($conn, "INSERT INTO user VALUES (NULL, '$username', '$password', '$nama', '$instansi', '$email', '$role')");
         return mysqli_affected_rows($conn);
     }
      
@@ -83,7 +83,7 @@
         $password = password_hash($password2, PASSWORD_DEFAULT);
         
         //jika password sama, masukkan data ke database
-        mysqli_query($conn, "INSERT INTO user VALUES ('', '$username', '$password', '$nama', '$instansi', '$email', '$role')");
+        mysqli_query($conn, "INSERT INTO user VALUES (NULL, '$username', '$password', '$nama', '$instansi', '$email', '$role')");
         return mysqli_affected_rows($conn);
     }
 
