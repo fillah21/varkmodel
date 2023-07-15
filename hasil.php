@@ -7,9 +7,11 @@
     $idhasil = dekripsi($_GET['id']);
 
     $data = query("SELECT * FROM hasil WHERE idhasil = $idhasil") [0];
+    cek_null($data);
     $hasil = hasil($data);
   } else {
     $data = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
+    cek_null($data);
     $hasil = hasil($data);
   }
 

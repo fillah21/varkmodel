@@ -21,23 +21,15 @@
     }
   }
 
-  $data_pertanyaan = query("SELECT * FROM pertanyaan WHERE kode LIKE 'T%'");
+  $jumlah_model = jumlah_data("SELECT * FROM model");
+  $data_pertanyaan = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'T%' ORDER BY kode ASC");
 
   if(isset($_POST['submit'])) {
-    // if (hitung_ulang($_POST, $id) > 0) {
-    //   echo "
-    //       <script>
-    //         document.location.href='hasil.php';
-    //       </script>
-    //   ";
-    // } else {
-    //   echo "
-    //       <script>
-    //         document.location.href='tes2.php';
-    //       </script>
-    //   ";
-    // }
-    hitung_ulang($_POST, $id);
+    if (hitung_ulang($_POST, $id) > 0) {
+      header("Location: hasil.php?id=" . $_GET['id']);
+    } else {
+      header("Location: tes2.php?id=" . $_GET['id']);
+    }
   }
 
 ?>

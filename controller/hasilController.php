@@ -113,10 +113,6 @@
       // Certainty Factor Selesai
 
       $iduser = dekripsi($_COOKIE['VRK21ZA']);
-      $v = $nilai_terbesar_V;
-      $a = $nilai_terbesar_A;
-      $r = $nilai_terbesar_R;
-      $k = $nilai_terbesar_K;
 
       foreach($kode_model as $koel) {
         $value[] = ${"nilai_terbesar_" . $koel};
@@ -161,9 +157,11 @@
       }
 
       foreach($kode_model as $kodel) {
-        $kode_kecil = strtolower($kodel);
+        $kodekecil = strtolower($kodel);
+        $kode_kecil[] = strtolower($kodel);
 
-        ${'old' . $kodel} = $hasil[$kode_kecil] / 100;
+
+        ${'old' . $kodel} = $hasil[$kodekecil] / 100;
       }
 
       // Bagian Forward Chaining
@@ -185,10 +183,10 @@
               ${$mod . $ap} = $data_jawaban['bobot'];
             }
 
-            echo "Bobot dari " . $mod . $ap ." adalah " . ${$mod . $ap} . "<br>";
+            // echo "Bobot dari " . $mod . $ap ." adalah " . ${$mod . $ap} . "<br>";
           }
 
-          echo "Dari pertanyaan " . $inputName . " jawabannya " . $inputValue . " dan bobotnya " . $data_jawaban['bobot'] . "<br><br>";
+          // echo "Dari pertanyaan " . $inputName . " jawabannya " . $inputValue . " dan bobotnya " . $data_jawaban['bobot'] . "<br><br>";
         }
       }
 
@@ -217,9 +215,9 @@
               $angka = $ko + 1;
               ${"cf_he_" . $md . $angka} = ${"cf_user_" . $md}[$ko] * ${"cf_pakar_" . $md}[$ko];
 
-              echo "Hasil CF HE " . $md . $angka . " dari " . ${"cf_user_" . $md}[$ko] . " dikali " . ${"cf_pakar_" . $md}[$ko] . " Adalah " . ${"cf_he_" . $md . $angka} . "<br>";
+              // echo "Hasil CF HE " . $md . $angka . " dari " . ${"cf_user_" . $md}[$ko] . " dikali " . ${"cf_pakar_" . $md}[$ko] . " Adalah " . ${"cf_he_" . $md . $angka} . "<br>";
             }
-            echo "<br>";
+            // echo "<br>";
           }
         // Hitung CF HE selesai
 
@@ -232,7 +230,7 @@
             ${"cf_old_" . $komo . $n + 1} = ${"cf_old_" . $komo . $n} + ${"cf_he_" . $komo . $n + 1} * (1 - ${"cf_old_" . $komo . $n});
 
             ${"cf_old_" . $komo}[] = ${"cf_old_" . $komo . $n + 1} * 100;
-            echo "Hasil CF OLD ". $komo . $n + 1 . " dari perkalian " . ${"cf_old_" . $komo . $n} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n} . ") adalah " . ${"cf_old_" . $komo . $n + 1} . "<br>";
+            // echo "Hasil CF OLD ". $komo . $n + 1 . " dari perkalian " . ${"cf_old_" . $komo . $n} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n} . ") adalah " . ${"cf_old_" . $komo . $n + 1} . "<br>";
           }
 
           ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[0];
@@ -242,24 +240,30 @@
               ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[$o];
             }
           }
-          echo "Nilai terbesar dari " . $komo . " adalah ". ${"nilai_terbesar_" . $komo} . "%<br><br>";
+          // echo "Nilai terbesar dari " . $komo . " adalah ". ${"nilai_terbesar_" . $komo} . "%<br><br>";
         }
         // Hitung CF Combine Selesai
       // Certainty Factor Selesai
 
-      // $iduser = dekripsi($_COOKIE['VRK21ZA']);
-      // $v = $nilai_terbesar_V;
-      // $a = $nilai_terbesar_A;
-      // $r = $nilai_terbesar_R;
-      // $k = $nilai_terbesar_K;
+      $iduser = dekripsi($_COOKIE['VRK21ZA']);
 
-      // $query = "INSERT INTO hasil
-      //               VALUES
-      //               (NULL, '$iduser', '$v', '$a', '$r', '$k', CURRENT_TIMESTAMP())";
-        
-      // mysqli_query($conn, $query);
+      foreach($kode_model as $koel) {
+        $value[] = ${"nilai_terbesar_" . $koel};
+      }
 
-      // return mysqli_affected_rows($conn);
+      for($i = 0; $i < count($value); $i++) {
+        $query_hasil[] = $kode_kecil[$i] . " = " . $value[$i];
+      }
+
+      $valuesString = implode(", ", $query_hasil);
+
+      $query = "UPDATE hasil SET ";
+
+      $query .= $valuesString . " WHERE idhasil = '$id'";
+      
+      mysqli_query($conn, $query);
+
+      return mysqli_affected_rows($conn);
     }
 
 
@@ -299,5 +303,32 @@
       }
 
       return $hasil;
+    }
+
+
+
+    function cek_null($data){
+      global $conn;
+      $model = query("SELECT * FROM model");
+      $idhasil = $data['idhasil'];
+
+      foreach ($model as $m) {
+        $kode_model[] = $m['kode'];
+        $nama_model[] = $m['model'];
+      }
+
+      foreach ($kode_model as $km) {
+        $kode_kecil[] = strtolower($km);
+      }
+
+      foreach ($kode_kecil as $kokel) {
+        if ($data[$kokel] === NULL) {
+          $query = "UPDATE hasil SET 
+                    $kokel = 0
+                  WHERE idhasil = '$idhasil'
+                ";
+        mysqli_query($conn, $query);
+        }
+      }
     }
 ?>
