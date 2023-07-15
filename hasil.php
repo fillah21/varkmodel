@@ -6,23 +6,31 @@
   if(isset($_GET['id'])) {
     $idhasil = dekripsi($_GET['id']);
 
+    $data_cek = query("SELECT * FROM hasil WHERE idhasil = $idhasil") [0];
+    cek_null($data_cek);
+
     $data = query("SELECT * FROM hasil WHERE idhasil = $idhasil") [0];
-    cek_null($data);
     $hasil = hasil($data);
   } else {
+    $data_cek = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
+    cek_null($data_cek);
+    
     $data = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
-    cek_null($data);
     $hasil = hasil($data);
   }
 
   if($hasil != false) {
     $idhasil_enkripsi = enkripsi($data['idhasil']);
-    
-    $model = query("SELECT * FROM model WHERE model = '$hasil'") [0];
-
-    $idmodel = $model['idmodel'];
-
+    $model_detail = query("SELECT * FROM model WHERE model = '$hasil'") [0];
+    $idmodel = $model_detail['idmodel'];
     $data_hasil = query("SELECT * FROM rekomendasi WHERE idmodel = $idmodel");
+
+    $model = query("SELECT * FROM model");
+
+    foreach ($model as $mod) {
+      $nama_model[] = $mod['model'];
+      $kode_kecil[] = strtolower($mod['kode']);
+    }
   } else {
     $idhasil_enkripsi = enkripsi($data['idhasil']);
     header("Location: tes2.php?id=" . $idhasil_enkripsi);
@@ -61,10 +69,9 @@
       <div class="container">
         <h3 class="text-center mt-5">Hasil tes :</h3>
         <ul class="list-inline text-center fs-4">
-          <li class="list-inline-item">Visual : <?= $data['v']; ?>%</li>
-          <li class="list-inline-item mx-3">Auditory : <?= $data['a']; ?>%</li>
-          <li class="list-inline-item me-3">Read/Write : <?= $data['r']; ?>%</li>
-          <li class="list-inline-item pb-4">Kinesthetic : <?= $data['k']; ?>%</li>
+          <?php for($i = 0; $i < count($nama_model); $i++) : ?>
+            <li class="list-inline-item me-3 pb-4"><?= $nama_model[$i]; ?> : <?= $data[$kode_kecil[$i]]; ?>%</li>
+          <?php endfor; ?>
         </ul>
       </div>
     </div>
