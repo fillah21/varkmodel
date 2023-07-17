@@ -1,12 +1,10 @@
 <!doctype html>
 <?php
-    require_once '../controller/jawabanController.php'; 
+    require_once '../controller/jawabanController.php';
+    session_start(); 
     validasi_admin();
-
     if(isset($_POST['submit'])) {
         if (create_jawaban($_POST) > 0) {
-            session_start();
-      
             $_SESSION["berhasil"] = "Data Jawaban Berhasil Ditambahkan!";
       
             echo "
@@ -15,8 +13,6 @@
                 </script>
             ";
           } else {
-            session_start();
-      
             $_SESSION["gagal"] = "Data Jawaban Gagal Ditambahkan!";
       
             echo "
@@ -27,23 +23,22 @@
           }
     } else {
         $idpertanyaan = $_POST['pertanyaan'];
-    
+        
         $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
-
+    
         $kode = kode_jawaban($pertanyaan);
-
+    
         // Ambil data dari model dan dibagi 2
         $jumlah_model = jumlah_data("SELECT * FROM model");
-
+    
         $jumlah_model2 = ceil($jumlah_model / 2);
         $jumlah_model3 = $jumlah_model - $jumlah_model2;
-
+    
         $model1 = query("SELECT * FROM model LIMIT $jumlah_model2");
         $model2 = query("SELECT * FROM model LIMIT $jumlah_model3 OFFSET $jumlah_model2");
-        // Ambil data selesai
     }
-
-
+    
+  
 ?>
 <html lang="en">
   <head>
@@ -53,6 +48,8 @@
     <link href="../style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="../img/Logo.png">
   </head>
 
@@ -162,3 +159,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php 
+    
+?>

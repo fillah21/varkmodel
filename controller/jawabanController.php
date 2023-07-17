@@ -24,6 +24,7 @@
         $kode = $data['kode'];
         $bobot = $data['bobot'];
 
+
         for ($i = 0; $i < count($jawaban); $i++) {
             $query = "INSERT INTO jawaban
                     VALUES
@@ -34,18 +35,6 @@
         return mysqli_affected_rows($conn);
     }
 
-    function create_single($data) {
-        global $conn;
-        $pertanyaan = htmlspecialchars($data['pertanyaan']);
-        $kode = htmlspecialchars($data['kode']);
-
-        $query = "INSERT INTO pertanyaan
-                    VALUES
-                    (NULL, '$pertanyaan', '$kode')";
-        mysqli_query($conn, $query);
-
-        return mysqli_affected_rows($conn);
-    }
 
     function update_jawaban($data) {
         global $conn;

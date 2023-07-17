@@ -12,7 +12,7 @@
             echo "<script>
                     Swal.fire(
                         'Gagal!',
-                        'Model sudah digunakan, silahkan pakai model lain',
+                        'Model sudah ada, silahkan pakai model lain',
                         'error'
                     )
                 </script>";
@@ -24,7 +24,7 @@
             echo "<script>
                     Swal.fire(
                         'Gagal!',
-                        'Kode sudah digunakan, silahkan pakai kode lain',
+                        'Kode sudah ada, silahkan pakai kode lain',
                         'error'
                     )
                 </script>";
@@ -79,7 +79,7 @@
                 echo "<script>
                         Swal.fire(
                             'Gagal!',
-                            'Model sudah digunakan, silahkan pakai model lain',
+                            'Model sudah ada, silahkan pakai model lain',
                             'error'
                         )
                     </script>";
@@ -93,7 +93,7 @@
                 echo "<script>
                         Swal.fire(
                             'Gagal!',
-                            'Kode sudah digunakan, silahkan pakai kode lain',
+                            'Kode sudah ada, silahkan pakai kode lain',
                             'error'
                         )
                     </script>";

@@ -61,8 +61,13 @@
             <input type="checkbox" id="show-password">
             <label for="show-password">Tampilkan password</label>
 
+            <div class="input-group justify-content-end">
+              <a href="register.php" style="color: blue; text-decoration: none;">Daftar Disini</a>
+            </div>
             <div class="input-group mb-3 justify-content-end">
-              <a href="register.php">Daftar Disini</a>
+              <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="color: blue;">
+                Lupa Password?
+              </a>
             </div>
 
             <div class=" input-group">
@@ -73,12 +78,39 @@
       </div>
     </div>
     <!-- Form Login Selesai -->
+    <!-- Modal Jawaban -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Masukkan Email</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <form action="sendemail.php" method="post">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="email" class="form-label">Masukkan email yang terdaftar</label>
+                <input type="email" class="form-control" id="email"  name="email">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Pilih</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Jawaban Selesai -->
 
     <!-- Membuat Footer -->
     <footer class="text-center bg-secondary text-light fw-bold lebar">
       <p class="mt-2">Copyright &copy; 2023 Create By Fillah Zaki Alhaqi</p>
     </footer>
     <!-- Footer Selesai -->
+
 
     <script src="bootstrap-5.2.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" crossorigin="anonymous"></script>

@@ -1,34 +1,12 @@
-<!doctype html>
 <?php 
   require_once '../controller/pertanyaanController.php';
+  session_start();
   validasi_admin();
 
   $kode = kode();
-
-  if(isset($_POST['submit'])) {
-    if (create($_POST) > 0) {
-      session_start();
-
-      $_SESSION["berhasil"] = "Data Pertanyaan Berhasil Ditambahkan!";
-
-      echo "
-          <script>
-            document.location.href='index.php';
-          </script>
-      ";
-    } else {
-      session_start();
-
-      $_SESSION["gagal"] = "Data Pertanyaan Gagal Ditambahkan!";
-
-      echo "
-          <script>
-            document.location.href='index.php';
-          </script>
-      ";
-    }
-  }
 ?>
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -37,6 +15,8 @@
     <link href="../style.css" rel="stylesheet">
     <link href="../bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="../img/Logo.png">
   </head>
 
@@ -78,3 +58,25 @@
     <script src="../bootstrap-5.2.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['submit'])) {
+    if (create($_POST) > 0) {
+      $_SESSION["berhasil"] = "Data Pertanyaan Berhasil Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } else {
+      $_SESSION["gagal"] = "Data Pertanyaan Gagal Ditambahkan!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    }
+  }
+?>

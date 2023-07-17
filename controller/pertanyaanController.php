@@ -37,6 +37,30 @@
         $pertanyaan = htmlspecialchars($data['pertanyaan']);
         $kode = htmlspecialchars($data['kode']);
 
+        if($pertanyaan == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Pertanyaan tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        } else {
+            $result = mysqli_query($conn, "SELECT pertanyaan FROM pertanyaan WHERE pertanyaan = '$pertanyaan'");
+
+            if (mysqli_fetch_assoc($result)) {
+                echo "<script>
+                        Swal.fire(
+                            'Gagal!',
+                            'Pertanyaan sudah ada, silahkan pakai pertanyaan lain',
+                            'error'
+                        )
+                    </script>";
+                exit();
+            }
+        }
+
         $query = "INSERT INTO pertanyaan
                     VALUES
                     (NULL, '$pertanyaan', '$kode')";
@@ -48,8 +72,33 @@
     function update($data) {
         global $conn;
         $id = $data['idpertanyaan'];
+        $oldpertanyaan = htmlspecialchars($data['oldpertanyaan']);
         $pertanyaan = htmlspecialchars($data['pertanyaan']);
         $kode = htmlspecialchars($data['kode']);
+
+        if($pertanyaan == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Pertanyaan tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        } elseif($pertanyaan != $oldpertanyaan) {
+            $result = mysqli_query($conn, "SELECT pertanyaan FROM pertanyaan WHERE pertanyaan = '$pertanyaan'");
+
+            if (mysqli_fetch_assoc($result)) {
+                echo "<script>
+                        Swal.fire(
+                            'Gagal!',
+                            'Pertanyaan sudah ada, silahkan pakai pertanyaan lain',
+                            'error'
+                        )
+                    </script>";
+                exit();
+            }
+        }
 
         $query = "UPDATE pertanyaan SET 
                     pertanyaan = '$pertanyaan',

@@ -1,8 +1,33 @@
 <?php 
+  require_once 'controller/userController.php';
+  session_start();
+
+  if(isset($_GET['key'])) {
+    $email = dekripsi($_GET['key']);
+
+    $result = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
+
+    if (!mysqli_fetch_assoc($result)) {
+      $_SESSION["gagal"] = "Email tidak ditemukan";
+      echo "
+          <script>
+              document.location.href='login.php';
+          </script>";
+      exit();
+    } else {
+        $data = query("SELECT * FROM user WHERE email = '$email'") [0];
   
-
-
+        $enkripsi_email = enkripsi($data['email']);
+    }
+  } else {
+    echo "<script>
+            document.location.href='login.php';
+          </script>";
+  }
 ?>
+
+
+
 <!DOCTYPE html>
 <html class="background" lang="en">
   <head>
@@ -12,6 +37,8 @@
     <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap-icons-1.10.3/bootstrap-icons.css" />
     <link rel="stylesheet" href="login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="img/Logo.png">
   </head>
 
@@ -24,16 +51,14 @@
           <h2 class="card-title text-center mb-2 login fw-bold">UBAH PASSWORD</h2>
           <p class="text-center mb-3">Masukkan password baru untuk mengganti password yang lama</p>
 
-          <form action="index.php" method="POST">
-            <?php if (isset ($error)) : ?>
-              <p style="color: red; font-style: italic;">Username / Password Salah</p>
-            <?php endif;?>
+          <form action="" method="POST">
+            <input type="hidden" name="iduser" value="<?= $data['iduser']; ?>">
 
             <div class="input-group mb-2">
-                <input class="form-control" type="text" placeholder="Nama User" aria-label="Disabled input example" disabled>
+                <input class="form-control" type="text" placeholder="<?= $data['nama']; ?>" aria-label="Disabled input example" disabled>
                 <div class="input-group-append">
                     <div class="input-group-text">
-                    <i class="bi bi-person-fill"></i>
+                      <i class="bi bi-person-fill"></i>
                     </div>
                 </div>
             </div>
@@ -56,12 +81,8 @@
               </div>
             </div>
 
-            <div class="input-group mb-3 justify-content-end">
-              <a href="register.php">Daftar Disini</a>
-            </div>
-
             <div class=" input-group">
-              <button type="submit" class="btn btn-primary justify-content-center panjang" name="login">Submit</button>
+              <button type="submit" class="btn btn-primary justify-content-center panjang" name="submit">Submit</button>
             </div>
           </form>
         </div>
@@ -80,3 +101,26 @@
     <script src="bootstrap-5.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+<?php 
+  if(isset($_POST['submit'])) {
+    if (update_password($_POST) > 0) {
+      $_SESSION["berhasil"] = "Ubah Password Berhasil!";
+      
+      echo "
+        <script>
+          document.location.href='login.php';
+        </script>
+        ";
+    } else {
+      $_SESSION["gagal"] = "Ubah Password Gagal!";
+
+      echo "
+          <script>
+            document.location.href='login.php';
+          </script>
+      ";
+      }
+  }
+?>

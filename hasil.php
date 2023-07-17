@@ -89,7 +89,7 @@
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
-              <p class="mt-3 fs-5" style="text-align: justify; text-indent: 0.5in;"><?= $model['deskripsi']; ?></p>
+              <p class="mt-3 fs-5" style="text-align: justify; text-indent: 0.5in;"><?= $model_detail['deskripsi']; ?></p>
             </div>
           </div>
         </div>

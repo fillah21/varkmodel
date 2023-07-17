@@ -181,6 +181,41 @@
         return mysqli_affected_rows($conn);
     }
 
+
+
+    function update_password($data) {
+        global $conn;
+
+        $iduser = $data['iduser'];
+        $password = $data['password'];
+        $password2 = $data['password2'];
+        $password = mysqli_real_escape_string($conn, $data["password"]);
+
+
+        if ($password !== $password2) {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Password tidak sesuai',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
+
+        $password = password_hash($password2, PASSWORD_DEFAULT);
+
+        $query = "UPDATE user SET 
+                    pwd = '$password'
+                  WHERE iduser = '$iduser'
+                ";
+        mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+
+
     function delete($id) {
         global $conn;
         mysqli_query($conn, "DELETE FROM user WHERE iduser = $id");
