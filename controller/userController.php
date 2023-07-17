@@ -34,6 +34,18 @@
                 </script>";
             exit();
         }
+
+        $result = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'") or die(mysqli_error($conn));
+        if (mysqli_fetch_assoc($result)) {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Email sudah digunakan, silahkan pakai email lain',
+                        'error'
+                    )
+                </script>";
+            exit();
+        }
         
         
         //enskripsi password
@@ -72,6 +84,18 @@
                     Swal.fire(
                         'Gagal!',
                         'Password tidak sesuai',
+                        'error'
+                    )
+                </script>";
+            exit();
+        }
+
+        $result = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'") or die(mysqli_error($conn));
+        if (mysqli_fetch_assoc($result)) {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Email sudah digunakan, silahkan pakai email lain',
                         'error'
                     )
                 </script>";
@@ -116,6 +140,7 @@
 
         return $error;
     }
+
      
     function update($data) {
         global $conn;
@@ -123,6 +148,7 @@
         $iduser = $data['iduser'];
         $oldpassword = $data['oldpassword'];
         $oldusername = $data['oldusername'];
+        $oldemail = $data['oldemail'];
         $username = strtolower(stripslashes ($data["username"]));
         $password = mysqli_real_escape_string($conn, $data["password"]);
         $password2 = mysqli_real_escape_string($conn, $data["password2"]);
@@ -167,6 +193,21 @@
             $password = password_hash($password2, PASSWORD_DEFAULT);
         }
 
+        if($email !== $oldemail) {
+            $result = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
+
+            if (mysqli_fetch_assoc($result)) {
+                echo "<script>
+                        Swal.fire(
+                            'Gagal!',
+                            'Email sudah digunakan, silahkan pakai email lain',
+                            'error'
+                        )
+                      </script>";
+                exit();
+            }
+        }
+
         $query = "UPDATE user SET 
                     username = '$username',
                     pwd = '$password',
@@ -187,9 +228,28 @@
         global $conn;
 
         $iduser = $data['iduser'];
-        $password = $data['password'];
-        $password2 = $data['password2'];
         $password = mysqli_real_escape_string($conn, $data["password"]);
+        $password2 = mysqli_real_escape_string($conn, $data["password2"]);
+
+        if($password == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Password tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        } elseif($password2 == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Silahkan isi konfirmasi password',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
 
 
         if ($password !== $password2) {

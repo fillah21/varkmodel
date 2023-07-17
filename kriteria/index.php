@@ -1,4 +1,3 @@
-<!doctype html>
 <?php 
     session_start();
     require_once '../controller/kriteriaController.php';
@@ -7,6 +6,9 @@
     $kriteria = query("SELECT * FROM kriteria");
     $jumlah = jumlah_data("SELECT * FROM kriteria");
 ?>
+
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">

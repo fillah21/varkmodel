@@ -4,8 +4,30 @@
     function create($data) {
         global $conn;
 
-        $idmodel = htmlspecialchars($data['model']);
+        $idmodel = ($data['model']);
         $kriteria = htmlspecialchars($data['kriteria']);
+
+        if($idmodel == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Model tidak boleh kosong, silahkan pilih model',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
+
+        if($kriteria == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Kriteria tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
 
         $query = "INSERT INTO kriteria
                     VALUES
@@ -22,6 +44,17 @@
         $id = $data['idkriteria'];
         $idmodel = htmlspecialchars($data['model']);
         $kriteria = htmlspecialchars($data['kriteria']);
+
+        if($kriteria == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Kriteria tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
 
         $query = "UPDATE kriteria SET 
                 idmodel = '$idmodel',

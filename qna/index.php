@@ -125,8 +125,8 @@
                                     if($jum < $model) : 
                             ?>
                                 <form action="create.php" method="post" class="d-inline">
-                                    <input type="hidden" name="idpertanyaan" value="<?= $data['idpertanyaan']; ?>">
-                                    <button type="submit" class="btn btn-primary btn-sm">Pilih</button>
+                                    <input type="hidden" name="pertanyaan" value="<?= $data['idpertanyaan']; ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
                                 </form>
                             <?php 
                                     endif;

@@ -6,6 +6,28 @@
         $idmodel = htmlspecialchars($data['model']);
         $rekomendasi = htmlspecialchars($data['rekomendasi']);
 
+        if($idmodel == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Model tidak boleh kosong, silahkan pilih model',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
+
+        if($rekomendasi == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Rekomendasi tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
+
         $query = "INSERT INTO rekomendasi
                     VALUES
                     (NULL, '$idmodel', '$rekomendasi')";
@@ -20,6 +42,17 @@
         $id = $data['idrekomendasi'];
         $idmodel = htmlspecialchars($data['model']);
         $rekomendasi = htmlspecialchars($data['rekomendasi']);
+
+        if($rekomendasi == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Rekomendasi tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
 
         $query = "UPDATE rekomendasi SET 
                 idmodel = '$idmodel',

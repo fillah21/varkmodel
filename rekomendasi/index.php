@@ -1,4 +1,3 @@
-<!doctype html>
 <?php 
   session_start();
   require_once '../controller/rekomendasiController.php';
@@ -7,6 +6,9 @@
   $rekomendasi = query("SELECT * FROM rekomendasi");
   $jumlah = jumlah_data("SELECT * FROM rekomendasi");
 ?>
+
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">

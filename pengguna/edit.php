@@ -38,12 +38,13 @@
             <input type="hidden" name="iduser" value="<?= $data['iduser']; ?>">
             <input type="hidden" name="oldpassword" value="<?= $data['pwd']; ?>">
             <input type="hidden" name="oldusername" value="<?= $data['username']; ?>">
+            <input type="hidden" name="oldemail" value="<?= $data['email']; ?>">
 
             <div class="mb-3 row">
                 <label for="username" class="col-sm-2 col-form-label">Username</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" value="<?= $data['username']; ?>" name="username">
+                    <input type="text" class="form-control" id="username" value="<?= $data['username']; ?>" name="username" required>
                 </div>
             </div>
     
@@ -51,7 +52,7 @@
                 <label for="password" class="col-sm-2 col-form-label">Password</label>
     
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" value="<?= $data['pwd']; ?>">
+                    <input type="password" class="form-control" id="password" name="password" value="<?= $data['pwd']; ?>" required>
                 </div>
             </div>
             
@@ -59,7 +60,7 @@
                 <label for="password2" class="col-sm-2 col-form-label">Konfirmasi Passowrd</label>
     
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password2" name="password2" value="<?= $data['pwd']; ?>">
+                    <input type="password" class="form-control" id="password2" name="password2" value="<?= $data['pwd']; ?>" required>
                 </div>
             </div>
     
@@ -67,7 +68,7 @@
                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nama" value="<?= $data['nama']; ?>" name="nama">
+                    <input type="text" class="form-control" id="nama" value="<?= $data['nama']; ?>" name="nama" required>
                 </div>
             </div>
     
@@ -75,7 +76,7 @@
                 <label for="instansi" class="col-sm-2 col-form-label">Instansi</label>
     
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="instansi" value="<?= $data['instansi']; ?>" name="instansi">
+                    <input type="text" class="form-control" id="instansi" value="<?= $data['instansi']; ?>" name="instansi" required>
                 </div>
             </div>
     
@@ -83,7 +84,7 @@
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
     
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" value="<?= $data['email']; ?>" name="email">
+                    <input type="email" class="form-control" id="email" value="<?= $data['email']; ?>" name="email" required>
                 </div>
             </div>
     

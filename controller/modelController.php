@@ -7,30 +7,53 @@
         $kode = htmlspecialchars($data['kode']);
         $deskripsi = htmlspecialchars($data['deskripsi']);
 
-        $result = mysqli_query($conn, "SELECT model FROM model WHERE model = '$model'") or die(mysqli_error($conn));
-        if (mysqli_fetch_assoc($result)) {
+        if($model == "") {
             echo "<script>
                     Swal.fire(
                         'Gagal!',
-                        'Model sudah ada, silahkan pakai model lain',
+                        'Model tidak boleh kosong',
                         'error'
                     )
-                </script>";
+                  </script>";
             exit();
+        } else {
+            $result = mysqli_query($conn, "SELECT model FROM model WHERE model = '$model'") or die(mysqli_error($conn));
+            if (mysqli_fetch_assoc($result)) {
+                echo "<script>
+                        Swal.fire(
+                            'Gagal!',
+                            'Model sudah ada, silahkan pakai model lain',
+                            'error'
+                        )
+                    </script>";
+                exit();
+            }
         }
 
-        $result = mysqli_query($conn, "SELECT kode FROM model WHERE kode = '$kode'") or die(mysqli_error($conn));
-        if (mysqli_fetch_assoc($result)) {
+        if($kode == "") {
             echo "<script>
                     Swal.fire(
                         'Gagal!',
-                        'Kode sudah ada, silahkan pakai kode lain',
+                        'Kode tidak boleh kosong',
                         'error'
                     )
-                </script>";
+                  </script>";
             exit();
+        } else {
+            $result = mysqli_query($conn, "SELECT kode FROM model WHERE kode = '$kode'") or die(mysqli_error($conn));
+            if (mysqli_fetch_assoc($result)) {
+                echo "<script>
+                        Swal.fire(
+                            'Gagal!',
+                            'Kode sudah ada, silahkan pakai kode lain',
+                            'error'
+                        )
+                    </script>";
+                exit();
+            }
         }
 
+        
         if (strpos($kode, ' ') !== false) {
             echo "<script>
                     Swal.fire(
@@ -74,30 +97,52 @@
         $deskripsi = htmlspecialchars($data['deskripsi']);
 
         if($model != $oldmodel) {
-            $result = mysqli_query($conn, "SELECT model FROM model WHERE model = '$model'") or die(mysqli_error($conn));
-            if (mysqli_fetch_assoc($result)) {
+            if($model == "") {
                 echo "<script>
                         Swal.fire(
                             'Gagal!',
-                            'Model sudah ada, silahkan pakai model lain',
+                            'Model tidak boleh kosong',
                             'error'
                         )
-                    </script>";
+                      </script>";
                 exit();
+            } else {
+                $result = mysqli_query($conn, "SELECT model FROM model WHERE model = '$model'") or die(mysqli_error($conn));
+                if (mysqli_fetch_assoc($result)) {
+                    echo "<script>
+                            Swal.fire(
+                                'Gagal!',
+                                'Model sudah ada, silahkan pakai model lain',
+                                'error'
+                            )
+                        </script>";
+                    exit();
+                }
             }
         }
 
         if($kode != $oldkode) {
-            $result = mysqli_query($conn, "SELECT kode FROM model WHERE kode = '$kode'") or die(mysqli_error($conn));
-            if (mysqli_fetch_assoc($result)) {
+            if($kode == "") {
                 echo "<script>
                         Swal.fire(
                             'Gagal!',
-                            'Kode sudah ada, silahkan pakai kode lain',
+                            'Kode tidak boleh kosong',
                             'error'
                         )
-                    </script>";
+                      </script>";
                 exit();
+            } else {
+                $result = mysqli_query($conn, "SELECT kode FROM model WHERE kode = '$kode'") or die(mysqli_error($conn));
+                if (mysqli_fetch_assoc($result)) {
+                    echo "<script>
+                            Swal.fire(
+                                'Gagal!',
+                                'Kode sudah ada, silahkan pakai kode lain',
+                                'error'
+                            )
+                        </script>";
+                    exit();
+                }
             }
 
             if (strpos($kode, ' ') !== false) {

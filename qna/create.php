@@ -1,61 +1,39 @@
 <!doctype html>
 <?php
     require_once '../controller/jawabanController.php'; 
+    session_start();
     validasi_admin();
 
-    if(isset($_POST['submit'])) {
-        if (create_jawaban($_POST) > 0) {
-            session_start();
-      
-            $_SESSION["berhasil"] = "Data Jawaban Berhasil Ditambahkan!";
-      
-            echo "
-                <script>
-                  document.location.href='index.php';
-                </script>
-            ";
-          } else {
-            session_start();
-      
-            $_SESSION["gagal"] = "Data Jawaban Gagal Ditambahkan!";
-      
-            echo "
-                <script>
-                  document.location.href='index.php';
-                </script>
-            ";
-          }
-    } else {
-        $idpertanyaan = $_POST['idpertanyaan'];
-        $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
-        $kode = kode_jawaban($pertanyaan);
+    $idpertanyaan = $_POST['pertanyaan'];
 
-        $jawaban = query("SELECT * FROM jawaban WHERE idpertanyaan = $idpertanyaan");
-        foreach($jawaban as $j) {
-            $kodeJawaban = $j['kode'];
-            $huruf_jawaban = substr($kodeJawaban, 0, 1);
-            $kode_jawaban[] = $huruf_jawaban;
-        }
+    $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
+    $kode = kode_jawaban($pertanyaan);
 
-        $model = query("SELECT * FROM model");
+    $jawaban = query("SELECT * FROM jawaban WHERE idpertanyaan = $idpertanyaan");
+    foreach($jawaban as $j) {
+        $kodeJawaban = $j['kode'];
+        $huruf_jawaban = substr($kodeJawaban, 0, 1);
+        $kode_jawaban[] = $huruf_jawaban;
+    }
 
-        foreach($model as $m) {
-            $kodeModel = $m['kode'];
+    $model = query("SELECT * FROM model");
 
-            $huruf_model = substr($kodeModel, 0, 1);
-            // $kode_model[] = $huruf_model;
+    foreach($model as $m) {
+        $kodeModel = $m['kode'];
+
+        $huruf_model = substr($kodeModel, 0, 1);
+        // $kode_model[] = $huruf_model;
             
-            if (!in_array($huruf_model, $kode_jawaban)) {
-                $use_kode[] = $huruf_model;
-            }
+        if (!in_array($huruf_model, $kode_jawaban)) {
+            $use_kode[] = $huruf_model;
         }
+    }
 
-        foreach ($use_kode as $u) {
-            $search_idmodel = query("SELECT * FROM model WHERE kode = '$u'")[0];
+    foreach ($use_kode as $u) {
+        $search_idmodel = query("SELECT * FROM model WHERE kode = '$u'")[0];
 
-            $idmodel[] = $search_idmodel['idmodel'];
-            $nama_model[] = $search_idmodel['model'];
-        }
+        $idmodel[] = $search_idmodel['idmodel'];
+        $nama_model[] = $search_idmodel['model'];
     }
 ?>
 <html lang="en">
@@ -66,6 +44,8 @@
     <link href="../style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="../img/Logo.png">
   </head>
 
@@ -79,6 +59,7 @@
         <h3><i class="bi bi-bar-chart-steps"></i> Tambah Data Jawaban</h3><hr>
 
         <form action="" method="post">
+            <input type="hidden" name="pertanyaan" value="<?= $idpertanyaan; ?>">
             <?php foreach($idmodel as $im) : ?>
                 <input type="hidden" name="idmodel[]" value="<?= $im; ?>">
             <?php endforeach; ?>
@@ -139,3 +120,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php 
+    if(isset($_POST['submit'])) {
+        if (create_jawaban($_POST) > 0) {
+            $_SESSION["berhasil"] = "Data Jawaban Berhasil Ditambahkan!";
+    
+            echo "
+                <script>
+                document.location.href='index.php';
+                </script>
+            ";
+        } else {
+            $_SESSION["gagal"] = "Data Jawaban Gagal Ditambahkan!";
+    
+            echo "
+                <script>
+                document.location.href='index.php';
+                </script>
+            ";
+        }
+    }
+?>

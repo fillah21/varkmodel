@@ -1,5 +1,6 @@
 <?php 
     require_once '../controller/jawabanController.php';
+    session_start();
     validasi_admin();
 
     $id = dekripsi($_GET['id']);
@@ -9,29 +10,6 @@
     $idpertanyaan = $data['idpertanyaan'];
     $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
 
-    if(isset($_POST['submit'])) {
-        if (update_jawaban($_POST) > 0) {
-          session_start();
-    
-          $_SESSION["berhasil"] = "Data Jawaban Berhasil Diubah!";
-    
-          echo "
-              <script>
-                document.location.href='index.php';
-              </script>
-          ";
-        } else {
-          session_start();
-    
-          $_SESSION["gagal"] = "Data Jawaban Gagal Diubah!";
-    
-          echo "
-              <script>
-                document.location.href='index.php';
-              </script>
-          ";
-        }
-      }
 ?>
 
 <!doctype html>
@@ -43,6 +21,8 @@
     <link href="../style.css" rel="stylesheet">
     <link href="../bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../bootstrap-icons-1.10.3/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="Icon" href="../img/Logo.png">
   </head>
 
@@ -102,3 +82,25 @@
     <script src="../bootstrap-5.2.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['submit'])) {
+    if (update_jawaban($_POST) > 0) {
+      $_SESSION["berhasil"] = "Data Jawaban Berhasil Diubah!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    } else {
+      $_SESSION["gagal"] = "Data Jawaban Gagal Diubah!";
+
+      echo "
+          <script>
+            document.location.href='index.php';
+          </script>
+      ";
+    }
+  }
+?>

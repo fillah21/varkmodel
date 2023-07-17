@@ -15,6 +15,7 @@ $data_model = query("SELECT * FROM model WHERE model = '$hasil'")[0];
 
 $idmodel = $data_model['idmodel'];
 $data_rekomendasi = query("SELECT * FROM rekomendasi WHERE idmodel = $idmodel");
+$data_kriteria = query("SELECT * FROM kriteria WHERE idmodel = $idmodel");
 
 use Dompdf\Dompdf;
 
@@ -102,13 +103,21 @@ $html =     '<!DOCTYPE html>
 
                 <table>
                     <tr>';
-                        $html .= "<th>Pengertian " . $hasil . "</th>";
+                        $html .= "<th>Tentang " . $hasil . "</th>";
                         $html .= '<th>Rekomendasi Belajar</th>
                     </tr>
 
                     <tr>';
-                        $html .= "<td><p>" . $data_model['deskripsi'] . "</p></td>".
-                                 "<td><ul>";
+                        $html .= "<td>
+                                    <p>" . $data_model['deskripsi'] . "</p>
+                                    <p>Kriteria " . $hasil . " : </p>
+                                    <ul>";
+                                        foreach($data_kriteria as $dk) {
+                                            $html .= "<li>" . $dk['kriteria'] . "</li>";
+                                        };
+                          $html .= "</ul>
+                                  </td>
+                                 <td><ul>";
                             foreach ($data_rekomendasi as $dr) {
                                         $html .= "<li>" . $dr['rekomendasi'] . "</li>";
                                     };

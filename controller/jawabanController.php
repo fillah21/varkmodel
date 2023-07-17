@@ -24,6 +24,36 @@
         $kode = $data['kode'];
         $bobot = $data['bobot'];
 
+        for($j = 0; $j < count($bobot); $j++) {
+            if($jawaban[$j] == "") {
+                echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Jawaban tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+                exit();
+            } elseif($bobot[$j] == "") {
+                echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Bobot tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+                exit();
+            } elseif($bobot[$j] == 0) {
+                echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Bobot tidak boleh bernilai 0',
+                        'error'
+                    )
+                  </script>";
+                exit();
+            }
+        }
 
         for ($i = 0; $i < count($jawaban); $i++) {
             $query = "INSERT INTO jawaban
@@ -42,6 +72,35 @@
         $id = $data['idjawaban'];
         $jawaban = htmlspecialchars($data['jawaban']);
         $bobot = htmlspecialchars($data['bobot']);
+
+        if($jawaban == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Jawaban tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        } elseif($bobot == "") {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Bobot tidak boleh kosong',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        } elseif($bobot == 0) {
+            echo "<script>
+                    Swal.fire(
+                        'Gagal!',
+                        'Bobot tidak boleh bernilai 0',
+                        'error'
+                    )
+                  </script>";
+            exit();
+        }
 
         $query = "UPDATE jawaban SET 
                 jawaban = '$jawaban',

@@ -3,25 +3,6 @@
     require_once '../controller/jawabanController.php';
     session_start(); 
     validasi_admin();
-    if(isset($_POST['submit'])) {
-        if (create_jawaban($_POST) > 0) {
-            $_SESSION["berhasil"] = "Data Jawaban Berhasil Ditambahkan!";
-      
-            echo "
-                <script>
-                  document.location.href='index.php';
-                </script>
-            ";
-          } else {
-            $_SESSION["gagal"] = "Data Jawaban Gagal Ditambahkan!";
-      
-            echo "
-                <script>
-                  document.location.href='index.php';
-                </script>
-            ";
-          }
-    } else {
         $idpertanyaan = $_POST['pertanyaan'];
         
         $pertanyaan = query("SELECT * FROM pertanyaan WHERE idpertanyaan = $idpertanyaan") [0];
@@ -36,7 +17,7 @@
     
         $model1 = query("SELECT * FROM model LIMIT $jumlah_model2");
         $model2 = query("SELECT * FROM model LIMIT $jumlah_model3 OFFSET $jumlah_model2");
-    }
+    
     
   
 ?>
@@ -63,6 +44,7 @@
         <h3><i class="bi bi-bar-chart-steps"></i> Tambah Data Jawaban</h3><hr>
 
         <form action="" method="post">
+            <input type="hidden" name="pertanyaan" value="<?= $idpertanyaan; ?>">
             <div class="row">
                 <div class="col-lg me-5">
                     <?php foreach($model1 as $m1) : ?>
@@ -142,7 +124,7 @@
                             <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
                 
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.1" max="1">
+                                <input type="number" class="form-control" id="bobot" value="" name="bobot[]" step="0.01" max="1">
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -161,5 +143,23 @@
 </html>
 
 <?php 
-    
+    if(isset($_POST['submit'])) {
+        if (create_jawaban($_POST) > 0) {
+            $_SESSION["berhasil"] = "Data Jawaban Berhasil Ditambahkan!";
+      
+            echo "
+                <script>
+                  document.location.href='index.php';
+                </script>
+            ";
+          } else {
+            $_SESSION["gagal"] = "Data Jawaban Gagal Ditambahkan!";
+      
+            echo "
+                <script>
+                  document.location.href='index.php';
+                </script>
+            ";
+          }
+    }
 ?>

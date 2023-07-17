@@ -25,6 +25,8 @@
     $idmodel = $model_detail['idmodel'];
     $data_hasil = query("SELECT * FROM rekomendasi WHERE idmodel = $idmodel");
 
+    $data_kriteria = query("SELECT * FROM kriteria WHERE idmodel = $idmodel");
+
     $model = query("SELECT * FROM model");
 
     foreach ($model as $mod) {
@@ -84,12 +86,19 @@
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-              Pengertian <?= $hasil; ?>
+              Tentang <?= $hasil; ?>
             </button>
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
               <p class="mt-3 fs-5" style="text-align: justify; text-indent: 0.5in;"><?= $model_detail['deskripsi']; ?></p>
+
+              <h5>Kriteria <?= $hasil; ?> :</h5>
+              <ul>
+                <?php foreach($data_kriteria as $dk) : ?>
+                  <li class="fs-5"><?= $dk['kriteria']; ?></li>
+                <?php endforeach; ?>
+              </ul>
             </div>
           </div>
         </div>
