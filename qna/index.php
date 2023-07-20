@@ -1,4 +1,3 @@
-<!doctype html>
 <?php 
     session_start();
     require_once '../controller/pertanyaanController.php';
@@ -12,6 +11,8 @@
     $jawaban = query("SELECT * FROM jawaban ORDER BY idpertanyaan DESC");
     $jumlah_jawaban = jumlah_data("SELECT * FROM jawaban");
 ?>
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">

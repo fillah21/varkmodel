@@ -87,7 +87,7 @@
                 foreach($data_pertanyaan as $p1) : 
             ?>
                 <div class="mb-5">
-                    <label for="rolename" class="form-label"><?= $i . " " . $p1['pertanyaan']; ?></label>
+                    <label for="rolename" class="form-label"><?= $i . ". " . $p1['pertanyaan']; ?></label>
                     <?php 
                         $idpertanyaan = $p1['idpertanyaan'];
                         $jawaban1 = query("SELECT * FROM jawaban WHERE idpertanyaan = $idpertanyaan ORDER BY RAND()");

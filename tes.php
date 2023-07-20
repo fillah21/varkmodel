@@ -83,7 +83,7 @@
               foreach($pertanyaan1 as $p1) : 
             ?>
               <div class="mb-5">
-                <label for="rolename" class="form-label"><?= $i . " " . $p1['pertanyaan']; ?></label>
+                <label for="rolename" class="form-label"><?= $i . ". " . $p1['pertanyaan']; ?></label>
                 <?php 
                   $idpertanyaan = $p1['idpertanyaan'];
                   $jawaban1 = query("SELECT * FROM jawaban WHERE idpertanyaan = $idpertanyaan ORDER BY RAND()");
@@ -106,7 +106,7 @@
               foreach($pertanyaan2 as $p2) : 
             ?>
               <div class="mb-5">
-                <label for="rolename" class="form-label"><?= $i . " " . $p2['pertanyaan']; ?></label>
+                <label for="rolename" class="form-label"><?= $i . ". " . $p2['pertanyaan']; ?></label>
                 <?php 
                   $idpertanyaan = $p2['idpertanyaan'];
                   $jawaban2 = query("SELECT * FROM jawaban WHERE idpertanyaan = $idpertanyaan ORDER BY RAND()");

@@ -245,8 +245,6 @@
         // Hitung CF Combine Selesai
       // Certainty Factor Selesai
 
-      $iduser = dekripsi($_COOKIE['VRK21ZA']);
-
       foreach($kode_model as $koel) {
         $value[] = ${"nilai_terbesar_" . $koel};
       }

@@ -36,6 +36,7 @@
             <input type="hidden" name="iduser" value="<?= $user['iduser']; ?>">
             <input type="hidden" name="oldpassword" value="<?= $user['pwd']; ?>">
             <input type="hidden" name="oldusername" value="<?= $user['username']; ?>">
+            <input type="hidden" name="oldemail" value="<?= $user['email']; ?>">
             <input type="hidden" name="oldrole" value="<?= $user['role']; ?>">
             <div class="mb-3 row">
                 <label for="username" class="col-sm-2 col-form-label">Username</label>
