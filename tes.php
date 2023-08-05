@@ -1,6 +1,17 @@
 <?php
   require_once 'controller/hasilController.php';
   validasi();
+
+  $jumlah_model = jumlah_data("SELECT * FROM model");
+  $jumlah_pertanyaan = jumlah_pertanyaan();
+
+  $jumlah_pertanyaan2 = ceil($jumlah_pertanyaan / 2);
+  $jumlah_pertanyaan3 = $jumlah_pertanyaan - $jumlah_pertanyaan2;
+
+
+  $pertanyaan1 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED) LIMIT $jumlah_pertanyaan2");
+  $pertanyaan2 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED) LIMIT $jumlah_pertanyaan3 OFFSET $jumlah_pertanyaan2");
+  
   if(isset($_POST['submit'])) {
     if (hitung($_POST) > 0) {
       echo "
@@ -17,15 +28,6 @@
     }
   }
   
-  $jumlah_model = jumlah_data("SELECT * FROM model");
-  $jumlah_pertanyaan = jumlah_pertanyaan();
-
-  $jumlah_pertanyaan2 = ceil($jumlah_pertanyaan / 2);
-  $jumlah_pertanyaan3 = $jumlah_pertanyaan - $jumlah_pertanyaan2;
-
-
-  $pertanyaan1 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY kode ASC LIMIT $jumlah_pertanyaan2");
-  $pertanyaan2 = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY kode ASC LIMIT $jumlah_pertanyaan3 OFFSET $jumlah_pertanyaan2");
 ?>
 
 

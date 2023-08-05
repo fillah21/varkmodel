@@ -128,7 +128,7 @@
                         // Menampilkan pesan sukses jika data berhasil dihapus 
                         Swal.fire({
                             icon : 'success',
-                            title: 'Data User Berhasil Dihapus!',
+                            title: 'Data Pengguna Berhasil Dihapus!',
                             confirmButtonText: 'Ok',
                             }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */

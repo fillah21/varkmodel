@@ -67,18 +67,18 @@
                     document.location.href='logout.php';
                   </script>";
             exit;
-          }
+        }
         
-          $id = dekripsi($_COOKIE['VRK21ZA']);
+        $id = dekripsi($_COOKIE['VRK21ZA']);
         
-          $result = mysqli_query($conn, "SELECT * FROM user WHERE iduser = '$id'");
+        $result = mysqli_query($conn, "SELECT * FROM user WHERE iduser = '$id'");
         
-          if (mysqli_num_rows($result) !== 1) {
+        if (mysqli_num_rows($result) !== 1) {
             echo "<script>
                     document.location.href='logout.php';
                   </script>";
             exit;
-          }
+        }
     }
 
     function validasi_admin() {

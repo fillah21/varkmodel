@@ -2,6 +2,13 @@
   session_start();
   require_once 'controller/userController.php';
 
+  if(isset($_COOKIE['VRK21ZA'])) {
+    echo "<script>
+            document.location.href='index.php';
+          </script>";
+    exit;
+  }
+
   if (isset($_POST["login"])) {
     if(login($_POST) == 1) {
       $error = true;

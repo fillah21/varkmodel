@@ -1,6 +1,7 @@
 <?php 
   require_once 'controller/userController.php';
   session_start();
+  setcookie('VRK21ZA', '', time() - 3600);
 
   if(isset($_GET['key'])) {
     $email = dekripsi($_GET['key']);

@@ -1,5 +1,5 @@
 <?php 
-    require_once '../controller/mainController.php';
+    // require_once '../controller/mainController.php';
 
     $id = dekripsi($_COOKIE['VRK21ZA']);
 

@@ -4,7 +4,7 @@
     function jumlah_pertanyaan() {
       $jumlah_model = jumlah_data("SELECT * FROM model");
     
-      $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%'");
+      $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED)" );
 
       return $jumlah_pertanyaan;
     }
@@ -16,7 +16,7 @@
       $jumlah_pertanyaan = jumlah_pertanyaan();
       $model = query("SELECT * FROM model");
       $jumlah_model = jumlah_data("SELECT * FROM model");
-      $pertanyaan = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%'");
+      $pertanyaan = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'P%' ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED)");
 
       foreach ($pertanyaan as $per) {
         $angka_per = preg_replace('/\D/', '', $per['kode']);
@@ -97,7 +97,7 @@
           for($n = 1; $n < $jumlah_pertanyaan; $n++) {
             ${"cf_old_" . $komo . $n} = ${"cf_old_" . $komo . $n - 1} + ${"cf_he_" . $komo . $n + 1} * (1 - ${"cf_old_" . $komo . $n - 1});
 
-            ${"cf_old_" . $komo}[] = ${"cf_old_" . $komo . $n} * 100;
+            ${"cf_old_" . $komo}[] = number_format(${"cf_old_" . $komo . $n} * 100, 2);
             // echo "Hasil CF OLD ". $komo . $n . " dari perkalian " . ${"cf_old_" . $komo . $n - 1} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n - 1} . ") adalah " . ${"cf_old_" . $komo . $n} . "<br>";
           }
           ${"nilai_terbesar_" . $komo} = ${"cf_old_" . $komo}[0];
@@ -136,9 +136,9 @@
     function hitung_ulang($data, $id) {
       global $conn;
       $jumlah_model = jumlah_data("SELECT * FROM model");
-      $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'T%'");
+      $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'T%' ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED)");
       $model = query("SELECT * FROM model");
-      $pertanyaan = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'T%'");
+      $pertanyaan = query("SELECT * FROM pertanyaan WHERE (SELECT COUNT(*) FROM jawaban WHERE jawaban.idpertanyaan = pertanyaan.idpertanyaan) = $jumlah_model AND kode LIKE 'T%' ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED)");
       $hasil = query("SELECT * FROM hasil WHERE idhasil = $id") [0];
 
       foreach ($pertanyaan as $per) {
@@ -229,7 +229,7 @@
           for($n = 0; $n < $jumlah_pertanyaan; $n++) {
             ${"cf_old_" . $komo . $n + 1} = ${"cf_old_" . $komo . $n} + ${"cf_he_" . $komo . $n + 1} * (1 - ${"cf_old_" . $komo . $n});
 
-            ${"cf_old_" . $komo}[] = ${"cf_old_" . $komo . $n + 1} * 100;
+            ${"cf_old_" . $komo}[] = number_format(${"cf_old_" . $komo . $n + 1} * 100, 2);
             // echo "Hasil CF OLD ". $komo . $n + 1 . " dari perkalian " . ${"cf_old_" . $komo . $n} . " + " . ${"cf_he_" . $komo . $n + 1} . " * (1 - " . ${"cf_old_" . $komo . $n} . ") adalah " . ${"cf_old_" . $komo . $n + 1} . "<br>";
           }
 

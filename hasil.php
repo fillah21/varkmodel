@@ -2,6 +2,7 @@
   require_once 'controller/hasilController.php';
   validasi();
   $id = dekripsi($_COOKIE['VRK21ZA']);
+  setlocale(LC_TIME, 'id_ID');  // Mengatur lokal ke bahasa Indonesia
 
   if(isset($_GET['id'])) {
     $idhasil = dekripsi($_GET['id']);
@@ -11,15 +12,19 @@
 
     $data = query("SELECT * FROM hasil WHERE idhasil = $idhasil") [0];
     $hasil = hasil($data);
+    $waktu_tes = strftime('%H:%M:%S / %d %B %Y', strtotime($data['tanggal_tes']));
   } else {
     $data_cek = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
     cek_null($data_cek);
     
     $data = query("SELECT * FROM hasil WHERE iduser = $id AND idhasil = (SELECT MAX(idhasil) FROM hasil WHERE iduser = $id)") [0];
     $hasil = hasil($data);
+    $waktu_tes = strftime('%H:%M:%S / %d %B %Y', strtotime($data['tanggal_tes']));
   }
 
   if($hasil != false) {
+    $data_user = query("SELECT * FROM user WHERE iduser = $id") [0];
+
     $idhasil_enkripsi = enkripsi($data['idhasil']);
     $model_detail = query("SELECT * FROM model WHERE model = '$hasil'") [0];
     $idmodel = $model_detail['idmodel'];
@@ -61,7 +66,7 @@
       <section class="text-center container">
         <div class="row pt-lg-5">
           <div class="col-md mx-auto">
-            <h3 class="fw-bold">Selamat <?= $nama; ?>, gaya belajar anda adalah :</h3>
+            <p class="fw-bold fs-2">Selamat <?= $nama; ?> (<?= $data_user['instansi']; ?>), dari tes yang dilakukan pada <?= $waktu_tes; ?> gaya belajar anda adalah :</p>
             <h1 class="fw-bold my-5" style="font-size: 60px;"><?= $hasil; ?></h1>
             <h4>Dengan kesimpulan sebagai berikut :</h4>
           </div>

@@ -3,10 +3,10 @@
     require_once '../controller/pertanyaanController.php';
     validasi_admin();
 
-    $pertanyaan = query("SELECT * FROM pertanyaan ORDER BY kode ASC");
+    $pertanyaan = query("SELECT * FROM pertanyaan ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED)");
     $jumlah_pertanyaan = jumlah_data("SELECT * FROM pertanyaan");
 
-    $per = query("SELECT * FROM pertanyaan WHERE idpertanyaan NOT IN (SELECT DISTINCT idpertanyaan FROM jawaban) ORDER BY kode ASC");
+    $per = query("SELECT * FROM pertanyaan WHERE idpertanyaan NOT IN (SELECT DISTINCT idpertanyaan FROM jawaban) ORDER BY CAST(SUBSTRING(kode, 2) AS UNSIGNED)");
 
     $jawaban = query("SELECT * FROM jawaban ORDER BY idpertanyaan DESC");
     $jumlah_jawaban = jumlah_data("SELECT * FROM jawaban");

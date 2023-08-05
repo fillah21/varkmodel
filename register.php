@@ -2,6 +2,12 @@
   require_once 'controller/userController.php'; 
   session_start();
 
+  if(isset($_COOKIE['VRK21ZA'])) {
+    $iduser = dekripsi($_COOKIE['VRK21ZA']);
+
+    $user = query("SELECT * FROM user WHERE iduser = $iduser") [0];
+  }
+
 ?>
 <!DOCTYPE html>
 <html class="background" lang="en">
@@ -82,7 +88,12 @@
               </div>
             </div>
 
-            <p class="text-end mt-3">Sudah Punya akun? <a href="login.php">Login</a></p>
+            <?php if(isset($_COOKIE['VRK21ZA']) && $user['role'] == "Admin") : ?>
+              <p class="text-end mt-3"><a href="pengguna">Kembali</a></p>
+            <?php else : ?>
+              <p class="text-end mt-3">Sudah Punya akun? <a href="login.php">Login</a></p>
+            <?php endif; ?>
+
             <div class=" input-group">
               <button type="submit" class="btn btn-primary justify-content-center panjang" name="register">Register</button>
             </div>

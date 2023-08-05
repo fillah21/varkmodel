@@ -91,7 +91,7 @@
             // Menampilkan Sweet Alert dengan tombol Yes dan No
             Swal.fire({
                 title: 'Konfirmasi',
-                text: 'Apakah Anda yakin ingin menghapus data? Seluruh data yang terkait dengan data ini (rekomendasi dan kriteria) akan ikut terhapus',
+                text: 'Apakah Anda yakin ingin menghapus data? Seluruh data yang terkait dengan data ini (rekomendasi, kriteria, dan jawaban) akan ikut terhapus',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',

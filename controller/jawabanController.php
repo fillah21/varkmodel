@@ -2,15 +2,11 @@
     require_once 'mainController.php';
 
     function kode_jawaban($pertanyaan) {
-        // Generate kode otomatis
-        $jumlah_string = strlen($pertanyaan['kode']);
-    
-        if($jumlah_string == 2) {
-            $kode = substr($pertanyaan['kode'], 1);
-        } else {
-            $kode = substr($pertanyaan['kode'], 1, 2);
-        }
-        // Kode otomatis selesai
+        $kodper = $pertanyaan['kode'];
+        
+        preg_match('/\d+/', $kodper, $matches);
+        
+        $kode = $matches[0];
 
         return $kode;
     }
