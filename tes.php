@@ -93,7 +93,7 @@
                 ?>
                   <div class="form-check">
                     <input type="radio" class="form-check-input" name="<?= $p1['kode']; ?>" value="<?= $j1['kode']; ?>" id="<?= $j1['kode']; ?>" required>
-                    <label class="form-check-label" for="<?= $j1['kode']; ?>"><?= $j1['jawaban']; ?></label>
+                    <label class="form-check-label" for="<?= $j1['kode']; ?>"><?= $j1['jawaban']; ?> (<?= $j1['kode']; ?>)</label>
                   </div>
                 <?php endforeach;?>
               </div>  
@@ -116,7 +116,7 @@
                 ?>
                   <div class="form-check">
                     <input type="radio" class="form-check-input" name="<?= $p2['kode']; ?>" value="<?= $j2['kode']; ?>" id="<?= $j2['kode']; ?>" required>
-                    <label class="form-check-label" for="<?= $j2['kode']; ?>"><?= $j2['jawaban']; ?></label>
+                    <label class="form-check-label" for="<?= $j2['kode']; ?>"><?= $j2['jawaban']; ?> (<?= $j2['kode']; ?>)</label>
                   </div>
                 <?php endforeach;?>
               </div>  

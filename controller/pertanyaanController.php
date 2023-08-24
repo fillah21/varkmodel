@@ -7,7 +7,6 @@
         $query = "SELECT * FROM pertanyaan";
         $kode = "";
 
-        $hasil = mysqli_query($conn, $query);
         $jumlah = jumlah_data($query);
 
         if($jumlah == 0) {

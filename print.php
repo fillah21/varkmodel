@@ -28,7 +28,6 @@ $html =     '<!DOCTYPE html>
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link href="bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
                 <title>Hasil Tes</title>
                 <style>
                     table {

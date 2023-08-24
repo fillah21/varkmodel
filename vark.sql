@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 17 Jul 2023 pada 16.44
+-- Waktu pembuatan: 24 Agu 2023 pada 12.07
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.15
 
@@ -42,11 +42,17 @@ CREATE TABLE `hasil` (
 --
 
 INSERT INTO `hasil` (`idhasil`, `iduser`, `tanggal_tes`, `v`, `a`, `r`, `k`) VALUES
-(1, 7, '2023-07-15 15:02:20', 10, 0, 64, 0),
-(2, 7, '2023-07-15 15:05:03', 64, 87.04, 64, 0),
-(3, 7, '2023-07-14 13:12:03', 87.04, 0, 64, 0),
-(4, 8, '2023-07-17 05:23:47', 0, 82.1476, 0, 64),
-(5, 8, '2023-07-17 05:27:29', 0, 50.41, 64, 87.04);
+(1, 2, '2023-08-03 13:43:06', 83.99, 81.87, 73.99, 73.99),
+(2, 2, '2023-08-07 17:52:52', 83.99, 83.99, 73.99, 73.99),
+(3, 2, '2023-08-07 17:17:42', 91.83, 70.55, 73.99, 73.99),
+(4, 2, '2023-08-07 17:21:28', 68.6, 90.75, 73.99, 73.99),
+(5, 2, '2023-08-07 17:25:15', 68.6, 70.55, 93.23, 73.99),
+(6, 2, '2023-08-07 17:29:25', 68.6, 70.55, 73.99, 93.23),
+(7, 7, '2023-08-10 04:50:10', 68.6, 49, 83.99, 93.23),
+(8, 19, '2023-08-14 02:35:46', 73.99, 73.99, 68.6, 93.23),
+(9, 19, '2023-08-14 02:38:57', 91.83, 70.55, 83.99, 49),
+(10, 19, '2023-08-14 02:40:45', 68.6, 84.98, 73.99, 86.73),
+(11, 19, '2023-08-14 02:41:31', 73.99, 67.36, 49, 96.55);
 
 -- --------------------------------------------------------
 
@@ -68,22 +74,53 @@ CREATE TABLE `jawaban` (
 --
 
 INSERT INTO `jawaban` (`idjawaban`, `idpertanyaan`, `idmodel`, `jawaban`, `kode`, `bobot`) VALUES
-(5, 10, 12, 'Menggambar, menunjukkan atau memberikan peta', 'V1', 0.8),
-(7, 10, 14, 'Menulis arah', 'R1', 0.8),
-(10, 11, 13, 'Menelepon, sms atau email kepada mereka', 'A2', 0.71),
-(11, 11, 14, 'Memberi mereka brosur tentang tempat itu', 'R2', 0.8),
-(12, 11, 16, 'Menjelaskan secara langsung beberapa garis besar tempat yang akan mereka kunjungi', 'K2', 0.8),
-(13, 10, 13, 'Menjelaskan arah secara lisan', 'A1', 0.75),
-(15, 10, 16, 'Pergi dengannya', 'K1', 0.8),
-(20, 11, 12, 'Memperlihatkan kepada mereka tempat yang indah dari tempat tujuan', 'V2', 0.72),
-(22, 12, 13, 'Mendengarkan penjelasan dari penjual', 'A4', 0.8),
-(23, 12, 14, 'Membaca secara detail atau mengecek lewat internet', 'R4', 0.8),
-(24, 12, 16, 'Mencoba atau mengecek terlebih dahulu', 'K4', 0.8),
-(25, 12, 12, 'Melihat secara langsung', 'V4', 0.8),
+(5, 10, 12, 'Menggambar, menunjukkan atau memberikan peta', 'V1', 0.7),
+(7, 10, 14, 'Menulis arah', 'R1', 0.7),
+(10, 11, 13, 'Menelepon, sms atau email kepada mereka', 'A2', 0.6),
+(11, 11, 14, 'Memberi mereka brosur tentang tempat itu', 'R2', 0.7),
+(12, 11, 16, 'Menjelaskan secara langsung beberapa garis besar tempat yang akan mereka kunjungi', 'K2', 0.7),
+(13, 10, 13, 'Menjelaskan arah secara lisan', 'A1', 0.65),
+(15, 10, 16, 'Pergi dengan orang yang ingin ditolong', 'K1', 0.7),
+(20, 11, 12, 'Memperlihatkan kepada mereka tempat yang indah dari tempat tujuan', 'V2', 0.62),
+(22, 12, 13, 'Mendengarkan penjelasan dari penjual', 'A4', 0.7),
+(23, 12, 14, 'Membaca secara detail atau mengecek lewat internet', 'R4', 0.7),
+(24, 12, 16, 'Mencoba atau mengecek terlebih dahulu', 'K4', 0.7),
+(25, 12, 12, 'Melihat bagus tidaknya ponsel lewat brosur', 'V4', 0.7),
 (26, 14, 12, 'Melihat materi berbentuk grafik dan sejenisnya yang menarik mata', 'V99', 0.8),
 (27, 14, 13, 'Mendengarkan penjelasan dari orang lain, podcast, seminar, atau semacamnya', 'A99', 0.8),
 (28, 14, 14, 'Materi berbentuk tulisan seperti di buku, jurnal, dan sebagainya', 'R99', 0.8),
-(29, 14, 16, 'Praktik langsung dan belajar dari kesalahan', 'K99', 0.8);
+(29, 14, 16, 'Praktik langsung dan belajar dari kesalahan', 'K99', 0.8),
+(48, 21, 12, 'Lihat video di internet bagaimana cara memasak', 'V3', 0.7),
+(49, 21, 13, 'Meminta saran teman', 'A3', 0.65),
+(50, 21, 14, 'Menggunakan bantuan resep', 'R3', 0.7),
+(51, 21, 16, 'Memasak sesuatu yang kamu tahu tanpa resep', 'K3', 0.7),
+(52, 22, 12, 'Menunjukkan diagram atau bagian-bagian mana yang salah', 'V5', 0.7),
+(53, 22, 13, 'Menjelaskan dimana letak kesalahan pada dirimu', 'A5', 0.7),
+(54, 22, 14, 'Memberikan sesuatu untuk kamu baca', 'R5', 0.7),
+(55, 22, 16, 'Menggunakan suatu alat dan menunjukkan apa yang salah', 'K5', 0.7),
+(56, 23, 12, 'Mengikuti petunjuk dari sebuah bagan', 'V6', 0.7),
+(57, 23, 13, 'Berbicara dengan orang yang tahu tentang program itu', 'A6', 0.7),
+(58, 23, 14, 'Membaca petunjuk mengenai cara kerja program tersebut', 'R6', 0.7),
+(59, 23, 16, 'Mencoba secara langsung, dan belajar dari kesalahan', 'K6', 0.7),
+(60, 24, 12, 'Dengan desain yang menarik dan bagian-bagian website tersebut', 'V7', 0.7),
+(61, 24, 13, 'Dari web yang bisa mendengarkan musik, radio atau wawancara', 'A7', 0.7),
+(62, 24, 14, 'Penjelasan yang sangat menarik dari daftar dan keterangan', 'R7', 0.62),
+(63, 24, 16, 'Sesuatu yang gampang dibuka dan dicoba', 'K7', 0.7),
+(64, 25, 12, 'Melihat diagram, bagan atau grafik mengenai materi yang ingin disampaikan', 'V8', 0.62),
+(65, 25, 13, 'Melakukan tanya jawab, atau diskusi grup dari tamu', 'A8', 0.7),
+(66, 25, 14, 'Kamu akan langsung membaca buku', 'R8', 0.7),
+(67, 25, 16, 'Berlatih secara langsung sebelum acara dimulai', 'K8', 0.7),
+(68, 26, 12, 'Melihat dari grafik hasil yang telah kamu terima', 'V9', 0.7),
+(69, 26, 13, 'Dari seseorang yang ikut ujian bersama kamu', 'A9', 0.7),
+(70, 26, 14, 'Melihat hasil secara langsung yang berbentuk tulisan rapih', 'R9', 0.7),
+(71, 26, 16, 'Menggunakan contoh dari apa yang telah kamu lakukan', 'K9', 0.7),
+(72, 27, 12, 'Membuat diagram dan grafik yang akan membantu menjelaskan sesuatu', 'V10', 0.7),
+(73, 27, 13, 'Menulis poin–poin penting dan menghafal sambil menyebutkannya berulang-ulang', 'A10', 0.62),
+(74, 27, 14, 'Menulis ulang dan membaca tulisan tersebut berulang-ulang', 'R10', 0.7),
+(75, 27, 16, 'Mengumpulkan contoh-contoh dan cerita agar mudah presentasi', 'K10', 0.7),
+(83, 31, 14, 'tes1', 'R11', 0.5),
+(84, 31, 16, 'tes1', 'K11', 0.5),
+(85, 31, 12, 'tes1', 'V11', 0.5);
 
 -- --------------------------------------------------------
 
@@ -164,7 +201,15 @@ INSERT INTO `pertanyaan` (`idpertanyaan`, `pertanyaan`, `kode`) VALUES
 (10, 'Kamu ingin menolong seseorang untuk pergi ke suatu tempat, kamu akan melakukan apa?', 'P1'),
 (11, 'Kamu merencanakan liburan bersama teman-teman, kamu ingin memberitahu rencana kamu, apa yang akan kamu lakukan?', 'P2'),
 (12, 'Kamu ingin membeli sebuah kamera digital atau ponsel, bagaimana cara kamu mengecek kualitas ponsel atau kamera tersebut?', 'P4'),
-(14, 'Jika ingin belajar, kamu lebih suka?', 'T99');
+(14, 'Jika ingin belajar, kamu lebih suka?', 'T99'),
+(21, 'Kamu ingin memasak sesuatu untuk seseorang, apa yang akan kamu lakukan ?', 'P3'),
+(22, 'Kamu punya masalah dengan perasaan kamu, apa yang ingin dokter bantu untuk kamu ?', 'P5'),
+(23, 'Kamu ingin belajar program, keterampilan atau game baru di komputer. Apa yang akan kamu lakukan ?', 'P6'),
+(24, 'Saya menyukai website yang mempunyai ?', 'P7'),
+(25, 'Kamu memilih untuk menjadi guru atau pembawa acara. Apa yang akan kamu lakukan sebagai persiapan?', 'P8'),
+(26, 'Kamu telah selesai mengikuti kejuaraan atau tes dan menginginkan hasilnya. Bagaimana caramu mengetahui hasilnya ?', 'P9'),
+(27, 'Kamu akan membuat pidato yang penting di sebuah konferensi atau wawancara pekerjaan. Apa yang akan kamu lakukan ?', 'P10'),
+(31, 'Testing 123', 'P11');
 
 -- --------------------------------------------------------
 
@@ -235,9 +280,12 @@ INSERT INTO `user` (`iduser`, `username`, `pwd`, `nama`, `instansi`, `email`, `r
 (4, 'deden', '$2y$10$pMLmeCUeuNkYOfNnsCZMjOd6mZIMB3vrcTUX2k..b5ClNw6XJ4xBq', 'Deden Suhendar', 'UMC', 'dedenselalutersakiti@gmail.com', 'User'),
 (5, 'alvin', '$2y$10$NmX8V8arwUTX.HuP/GHVxO95b6tdWbj2tpPTHS9S0ydRtnf24t0Ji', 'Alvin Nugraha', 'UMC', 'alvin@gmail.com', 'User'),
 (6, 'eka', '$2y$10$hGG4QUoDqCxB93seFcnjAuBKEwHx89abDZL/KFz0dfZVYqk3lGBQS', 'Eka Nurseva Saniyah', 'UMC', 'ekanursevas@gmail.com', 'User'),
-(7, 'fillah21', '$2y$10$M1ZWHHjHN2tnfQRj/dsVA.ku4qAzh.o.vADrs9EX4V0W/QvxUSpI6', 'Fillah Zaki Alhaqi', 'SMAN 1 Cilimus', 'fillah.alhaqi11@gmail.com', 'Admin'),
+(7, 'fillah21', '$2y$10$fKkXe5NdGwpb2CJ5v5puDuauWLEhE0toJ9pcan94a6p1gZKWI2UXy', 'Fillah Zaki Alhaqi', 'SMAN 1 Cilimus', 'fillah.alhaqi11@gmail.com', 'Admin'),
 (8, 'user', '$2y$10$UJg.36/O1zSNtmS6EjbMgOyeJgnZdJ.xtMOJAnQ2VgoMvY2kRRo2C', 'User App', 'UMC', 'user@gmail.com', 'User'),
-(9, 'desy28', '$2y$10$fxZsHPleiEYXit/.zYTQc.mkOkGzGc9OsBEQw5d5dIYZjxEuzbk06', 'Desy Fitriyani Edit', 'Unjani Edit', 'desyfitriyani28@gmail.com', 'Admin');
+(11, 'desy', '$2y$10$GZgOjKKh/7c7wUZEWtssPOQ2sD5.d4.KkH5IaNfathdH28uwSKCBy', 'Desy Fitriyani', 'Unjani', 'desyfitriyani@gmail.com', 'User'),
+(12, 'ekauser', '$2y$10$rJ9.26WPp6x1ODd4CYOuq./vJnkzYQoisJHwrdY5.8hxMu6VEnyyi', 'Eka Nurseva', 'umc', 'ekans@gmail.com', 'User'),
+(17, 'user1', '$2y$10$UyGZxTYisfXCpi0Ib8skQ.XwLhrKRTzHiVfvdf5CQ03FfOdG14usi', 'User1', 'UMC', 'user1@gmail.com', 'User'),
+(19, 'user2', '$2y$10$vwhOXdZOmdCbRWdtNR/pvu2/cKIxcpnFPY8w2Az66t6yQl26NvVKy', 'User2', 'UMC', 'user2@gmail.com', 'User');
 
 --
 -- Indexes for dumped tables
@@ -298,43 +346,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `idhasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idhasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `jawaban`
 --
 ALTER TABLE `jawaban`
-  MODIFY `idjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT untuk tabel `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `idkriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idkriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `model`
 --
 ALTER TABLE `model`
-  MODIFY `idmodel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idmodel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  MODIFY `idpertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idpertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `rekomendasi`
 --
 ALTER TABLE `rekomendasi`
-  MODIFY `idrekomendasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idrekomendasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
