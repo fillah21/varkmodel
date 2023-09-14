@@ -21,6 +21,12 @@
 
     var_dump($sql_data);
   }
+
+  // $query = "UPDATE jawaban SET 
+  // bobot = '1'
+  // WHERE bobot = '0.8'
+  // ";
+  // mysqli_query($conn, $query);
 ?>
 
 

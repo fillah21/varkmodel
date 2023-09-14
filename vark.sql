@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 24 Agu 2023 pada 12.07
+-- Waktu pembuatan: 14 Sep 2023 pada 05.20
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.15
 
@@ -52,7 +52,13 @@ INSERT INTO `hasil` (`idhasil`, `iduser`, `tanggal_tes`, `v`, `a`, `r`, `k`) VAL
 (8, 19, '2023-08-14 02:35:46', 73.99, 73.99, 68.6, 93.23),
 (9, 19, '2023-08-14 02:38:57', 91.83, 70.55, 83.99, 49),
 (10, 19, '2023-08-14 02:40:45', 68.6, 84.98, 73.99, 86.73),
-(11, 19, '2023-08-14 02:41:31', 73.99, 67.36, 49, 96.55);
+(11, 19, '2023-08-14 02:41:31', 73.99, 67.36, 49, 96.55),
+(12, 2, '2023-08-29 12:47:48', 93.13, 73.75, 75, 75),
+(13, 2, '2023-09-05 18:40:27', 93.13, 73.75, 75, 75),
+(14, 2, '2023-09-05 18:50:46', 72.5, 92.78, 87.5, 50),
+(15, 2, '2023-09-05 18:52:19', 72.5, 92.78, 75, 75),
+(16, 2, '2023-09-05 19:00:13', 72.5, 73.75, 93.75, 75),
+(17, 2, '2023-09-05 19:06:47', 72.5, 73.75, 75, 93.75);
 
 -- --------------------------------------------------------
 
@@ -65,7 +71,7 @@ CREATE TABLE `jawaban` (
   `idpertanyaan` int(11) NOT NULL,
   `idmodel` int(11) NOT NULL,
   `jawaban` text NOT NULL,
-  `kode` varchar(10) NOT NULL,
+  `kode` varchar(5) NOT NULL,
   `bobot` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -74,53 +80,50 @@ CREATE TABLE `jawaban` (
 --
 
 INSERT INTO `jawaban` (`idjawaban`, `idpertanyaan`, `idmodel`, `jawaban`, `kode`, `bobot`) VALUES
-(5, 10, 12, 'Menggambar, menunjukkan atau memberikan peta', 'V1', 0.7),
-(7, 10, 14, 'Menulis arah', 'R1', 0.7),
-(10, 11, 13, 'Menelepon, sms atau email kepada mereka', 'A2', 0.6),
-(11, 11, 14, 'Memberi mereka brosur tentang tempat itu', 'R2', 0.7),
-(12, 11, 16, 'Menjelaskan secara langsung beberapa garis besar tempat yang akan mereka kunjungi', 'K2', 0.7),
-(13, 10, 13, 'Menjelaskan arah secara lisan', 'A1', 0.65),
-(15, 10, 16, 'Pergi dengan orang yang ingin ditolong', 'K1', 0.7),
-(20, 11, 12, 'Memperlihatkan kepada mereka tempat yang indah dari tempat tujuan', 'V2', 0.62),
-(22, 12, 13, 'Mendengarkan penjelasan dari penjual', 'A4', 0.7),
-(23, 12, 14, 'Membaca secara detail atau mengecek lewat internet', 'R4', 0.7),
-(24, 12, 16, 'Mencoba atau mengecek terlebih dahulu', 'K4', 0.7),
-(25, 12, 12, 'Melihat bagus tidaknya ponsel lewat brosur', 'V4', 0.7),
-(26, 14, 12, 'Melihat materi berbentuk grafik dan sejenisnya yang menarik mata', 'V99', 0.8),
-(27, 14, 13, 'Mendengarkan penjelasan dari orang lain, podcast, seminar, atau semacamnya', 'A99', 0.8),
-(28, 14, 14, 'Materi berbentuk tulisan seperti di buku, jurnal, dan sebagainya', 'R99', 0.8),
-(29, 14, 16, 'Praktik langsung dan belajar dari kesalahan', 'K99', 0.8),
-(48, 21, 12, 'Lihat video di internet bagaimana cara memasak', 'V3', 0.7),
-(49, 21, 13, 'Meminta saran teman', 'A3', 0.65),
-(50, 21, 14, 'Menggunakan bantuan resep', 'R3', 0.7),
-(51, 21, 16, 'Memasak sesuatu yang kamu tahu tanpa resep', 'K3', 0.7),
-(52, 22, 12, 'Menunjukkan diagram atau bagian-bagian mana yang salah', 'V5', 0.7),
-(53, 22, 13, 'Menjelaskan dimana letak kesalahan pada dirimu', 'A5', 0.7),
-(54, 22, 14, 'Memberikan sesuatu untuk kamu baca', 'R5', 0.7),
-(55, 22, 16, 'Menggunakan suatu alat dan menunjukkan apa yang salah', 'K5', 0.7),
-(56, 23, 12, 'Mengikuti petunjuk dari sebuah bagan', 'V6', 0.7),
-(57, 23, 13, 'Berbicara dengan orang yang tahu tentang program itu', 'A6', 0.7),
-(58, 23, 14, 'Membaca petunjuk mengenai cara kerja program tersebut', 'R6', 0.7),
-(59, 23, 16, 'Mencoba secara langsung, dan belajar dari kesalahan', 'K6', 0.7),
-(60, 24, 12, 'Dengan desain yang menarik dan bagian-bagian website tersebut', 'V7', 0.7),
-(61, 24, 13, 'Dari web yang bisa mendengarkan musik, radio atau wawancara', 'A7', 0.7),
-(62, 24, 14, 'Penjelasan yang sangat menarik dari daftar dan keterangan', 'R7', 0.62),
-(63, 24, 16, 'Sesuatu yang gampang dibuka dan dicoba', 'K7', 0.7),
-(64, 25, 12, 'Melihat diagram, bagan atau grafik mengenai materi yang ingin disampaikan', 'V8', 0.62),
-(65, 25, 13, 'Melakukan tanya jawab, atau diskusi grup dari tamu', 'A8', 0.7),
-(66, 25, 14, 'Kamu akan langsung membaca buku', 'R8', 0.7),
-(67, 25, 16, 'Berlatih secara langsung sebelum acara dimulai', 'K8', 0.7),
-(68, 26, 12, 'Melihat dari grafik hasil yang telah kamu terima', 'V9', 0.7),
-(69, 26, 13, 'Dari seseorang yang ikut ujian bersama kamu', 'A9', 0.7),
-(70, 26, 14, 'Melihat hasil secara langsung yang berbentuk tulisan rapih', 'R9', 0.7),
-(71, 26, 16, 'Menggunakan contoh dari apa yang telah kamu lakukan', 'K9', 0.7),
-(72, 27, 12, 'Membuat diagram dan grafik yang akan membantu menjelaskan sesuatu', 'V10', 0.7),
-(73, 27, 13, 'Menulis poin–poin penting dan menghafal sambil menyebutkannya berulang-ulang', 'A10', 0.62),
-(74, 27, 14, 'Menulis ulang dan membaca tulisan tersebut berulang-ulang', 'R10', 0.7),
-(75, 27, 16, 'Mengumpulkan contoh-contoh dan cerita agar mudah presentasi', 'K10', 0.7),
-(83, 31, 14, 'tes1', 'R11', 0.5),
-(84, 31, 16, 'tes1', 'K11', 0.5),
-(85, 31, 12, 'tes1', 'V11', 0.5);
+(5, 10, 12, 'Menggambar, menunjukkan atau memberikan peta', 'V1', 1),
+(7, 10, 14, 'Menulis arah', 'R1', 1),
+(10, 11, 13, 'Menelepon, sms atau email kepada mereka', 'A2', 0.89),
+(11, 11, 14, 'Memberi mereka brosur tentang tempat itu', 'R2', 1),
+(12, 11, 16, 'Menjelaskan secara langsung beberapa garis besar tempat yang akan mereka kunjungi', 'K2', 1),
+(13, 10, 13, 'Menjelaskan arah secara lisan', 'A1', 0.95),
+(15, 10, 16, 'Pergi dengan orang yang ingin ditolong', 'K1', 1),
+(20, 11, 12, 'Memperlihatkan kepada mereka tempat yang indah dari tempat tujuan', 'V2', 0.9),
+(22, 12, 13, 'Mendengarkan penjelasan dari penjual', 'A4', 1),
+(23, 12, 14, 'Membaca secara detail atau mengecek lewat internet', 'R4', 1),
+(24, 12, 16, 'Mencoba atau mengecek terlebih dahulu', 'K4', 1),
+(25, 12, 12, 'Melihat bagus tidaknya ponsel lewat brosur', 'V4', 1),
+(26, 14, 12, 'Melihat materi berbentuk grafik dan sejenisnya yang menarik mata', 'V99', 1),
+(27, 14, 13, 'Mendengarkan penjelasan dari orang lain, podcast, seminar, atau semacamnya', 'A99', 1),
+(28, 14, 14, 'Materi berbentuk tulisan seperti di buku, jurnal, dan sebagainya', 'R99', 1),
+(29, 14, 16, 'Praktik langsung dan belajar dari kesalahan', 'K99', 1),
+(48, 21, 12, 'Lihat video di internet bagaimana cara memasak', 'V3', 1),
+(49, 21, 13, 'Meminta saran teman', 'A3', 0.95),
+(50, 21, 14, 'Menggunakan bantuan resep', 'R3', 1),
+(51, 21, 16, 'Memasak sesuatu yang kamu tahu tanpa resep', 'K3', 1),
+(52, 22, 12, 'Menunjukkan diagram atau bagian-bagian mana yang salah', 'V5', 1),
+(53, 22, 13, 'Menjelaskan dimana letak kesalahan pada dirimu', 'A5', 1),
+(54, 22, 14, 'Memberikan sesuatu untuk kamu baca', 'R5', 1),
+(55, 22, 16, 'Menggunakan suatu alat dan menunjukkan apa yang salah', 'K5', 1),
+(56, 23, 12, 'Mengikuti petunjuk dari sebuah bagan', 'V6', 1),
+(57, 23, 13, 'Berbicara dengan orang yang tahu tentang program itu', 'A6', 1),
+(58, 23, 14, 'Membaca petunjuk mengenai cara kerja program tersebut', 'R6', 1),
+(59, 23, 16, 'Mencoba secara langsung, dan belajar dari kesalahan', 'K6', 1),
+(60, 24, 12, 'Dengan desain yang menarik dan bagian-bagian website tersebut', 'V7', 1),
+(61, 24, 13, 'Dari web yang bisa mendengarkan musik, radio atau wawancara', 'A7', 1),
+(62, 24, 14, 'Penjelasan yang sangat menarik dari daftar dan keterangan', 'R7', 0.9),
+(63, 24, 16, 'Sesuatu yang gampang dibuka dan dicoba', 'K7', 1),
+(64, 25, 12, 'Melihat diagram, bagan atau grafik mengenai materi yang ingin disampaikan', 'V8', 0.9),
+(65, 25, 13, 'Melakukan tanya jawab, atau diskusi grup dari tamu', 'A8', 1),
+(66, 25, 14, 'Kamu akan langsung membaca buku', 'R8', 1),
+(67, 25, 16, 'Berlatih secara langsung sebelum acara dimulai', 'K8', 1),
+(68, 26, 12, 'Melihat dari grafik hasil yang telah kamu terima', 'V9', 1),
+(69, 26, 13, 'Dari seseorang yang ikut ujian bersama kamu', 'A9', 1),
+(70, 26, 14, 'Melihat hasil secara langsung yang berbentuk tulisan rapih', 'R9', 1),
+(71, 26, 16, 'Menggunakan contoh dari apa yang telah kamu lakukan', 'K9', 1),
+(72, 27, 12, 'Membuat diagram dan grafik yang akan membantu menjelaskan sesuatu', 'V10', 1),
+(73, 27, 13, 'Menulis poin–poin penting dan menghafal sambil menyebutkannya berulang-ulang', 'A10', 0.9),
+(74, 27, 14, 'Menulis ulang dan membaca tulisan tersebut berulang-ulang', 'R10', 1),
+(75, 27, 16, 'Mengumpulkan contoh-contoh dan cerita agar mudah presentasi', 'K10', 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +170,7 @@ INSERT INTO `kriteria` (`idkriteria`, `idmodel`, `kriteria`) VALUES
 CREATE TABLE `model` (
   `idmodel` int(11) NOT NULL,
   `model` varchar(20) NOT NULL,
-  `kode` varchar(10) NOT NULL,
+  `kode` varchar(5) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -190,7 +193,7 @@ INSERT INTO `model` (`idmodel`, `model`, `kode`, `deskripsi`) VALUES
 CREATE TABLE `pertanyaan` (
   `idpertanyaan` int(11) NOT NULL,
   `pertanyaan` text NOT NULL,
-  `kode` varchar(10) NOT NULL
+  `kode` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -208,8 +211,7 @@ INSERT INTO `pertanyaan` (`idpertanyaan`, `pertanyaan`, `kode`) VALUES
 (24, 'Saya menyukai website yang mempunyai ?', 'P7'),
 (25, 'Kamu memilih untuk menjadi guru atau pembawa acara. Apa yang akan kamu lakukan sebagai persiapan?', 'P8'),
 (26, 'Kamu telah selesai mengikuti kejuaraan atau tes dan menginginkan hasilnya. Bagaimana caramu mengetahui hasilnya ?', 'P9'),
-(27, 'Kamu akan membuat pidato yang penting di sebuah konferensi atau wawancara pekerjaan. Apa yang akan kamu lakukan ?', 'P10'),
-(31, 'Testing 123', 'P11');
+(27, 'Kamu akan membuat pidato yang penting di sebuah konferensi atau wawancara pekerjaan. Apa yang akan kamu lakukan ?', 'P10');
 
 -- --------------------------------------------------------
 
@@ -263,11 +265,11 @@ INSERT INTO `rekomendasi` (`idrekomendasi`, `idmodel`, `rekomendasi`) VALUES
 
 CREATE TABLE `user` (
   `iduser` int(11) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `pwd` varchar(100) NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `pwd` varchar(70) NOT NULL,
+  `nama` varchar(50) NOT NULL,
   `instansi` varchar(45) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -346,7 +348,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `idhasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idhasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `jawaban`

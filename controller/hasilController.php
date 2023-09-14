@@ -49,7 +49,8 @@
 
           foreach($kode_model as $mod) {
             if($first_code == $mod) {
-              ${$mod . $ap} = $data_jawaban['bobot'];
+              // ${$mod . $ap} = $data_jawaban['bobot'];
+              ${$mod . $ap} = 0.5;
             }
 
             // echo "Bobot dari " . $mod . $ap ." adalah " . ${$mod . $ap} . "<br>";
@@ -180,7 +181,8 @@
 
           foreach($kode_model as $mod) {
             if($first_code == $mod) {
-              ${$mod . $ap} = $data_jawaban['bobot'];
+              // ${$mod . $ap} = $data_jawaban['bobot'];
+              ${$mod . $ap} = 0.5;
             }
 
             // echo "Bobot dari " . $mod . $ap ." adalah " . ${$mod . $ap} . "<br>";
