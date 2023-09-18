@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 14 Sep 2023 pada 05.20
+-- Waktu pembuatan: 18 Sep 2023 pada 12.12
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.15
 
@@ -58,7 +58,10 @@ INSERT INTO `hasil` (`idhasil`, `iduser`, `tanggal_tes`, `v`, `a`, `r`, `k`) VAL
 (14, 2, '2023-09-05 18:50:46', 72.5, 92.78, 87.5, 50),
 (15, 2, '2023-09-05 18:52:19', 72.5, 92.78, 75, 75),
 (16, 2, '2023-09-05 19:00:13', 72.5, 73.75, 93.75, 75),
-(17, 2, '2023-09-05 19:06:47', 72.5, 73.75, 75, 93.75);
+(17, 2, '2023-09-05 19:06:47', 72.5, 73.75, 75, 93.75),
+(18, 20, '2023-09-17 13:26:45', 93.13, 73.75, 75, 75),
+(19, 8, '2023-09-18 04:30:44', 93.13, 71.13, 75, 75),
+(20, 2, '2023-09-18 05:40:59', 98.28, 96.56, 75, 99.22);
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,47 @@ INSERT INTO `jawaban` (`idjawaban`, `idpertanyaan`, `idmodel`, `jawaban`, `kode`
 (72, 27, 12, 'Membuat diagram dan grafik yang akan membantu menjelaskan sesuatu', 'V10', 1),
 (73, 27, 13, 'Menulis poin–poin penting dan menghafal sambil menyebutkannya berulang-ulang', 'A10', 0.9),
 (74, 27, 14, 'Menulis ulang dan membaca tulisan tersebut berulang-ulang', 'R10', 1),
-(75, 27, 16, 'Mengumpulkan contoh-contoh dan cerita agar mudah presentasi', 'K10', 1);
+(75, 27, 16, 'Mengumpulkan contoh-contoh dan cerita agar mudah presentasi', 'K10', 1),
+(86, 32, 12, 'Jawaban', 'V11', 1),
+(87, 32, 13, 'Jawaban', 'A11', 1),
+(88, 32, 14, 'Jawaban', 'R11', 1),
+(89, 32, 16, 'Jawaban', 'K11', 1),
+(90, 33, 12, 'Jawaban', 'V12', 1),
+(91, 33, 13, 'Jawaban', 'A12', 1),
+(92, 33, 14, 'Jawaban', 'R12', 1),
+(93, 33, 16, 'Jawaban', 'K12', 1),
+(94, 34, 12, 'Jawaban', 'V13', 1),
+(95, 34, 13, 'Jawaban', 'A13', 1),
+(96, 34, 14, 'Jawaban', 'R13', 1),
+(97, 34, 16, 'Jawaban', 'K13', 1),
+(98, 35, 12, 'Jawaban', 'V14', 1),
+(99, 35, 13, 'Jawaban', 'A14', 1),
+(100, 35, 14, 'Jawaban', 'R14', 1),
+(101, 35, 16, 'Jawaban', 'K14', 1),
+(102, 36, 12, 'Jawaban', 'V15', 1),
+(103, 36, 13, 'Jawaban', 'A15', 1),
+(104, 36, 14, 'Jawaban', 'R15', 1),
+(105, 36, 16, 'Jawaban', 'K15', 1),
+(106, 37, 12, 'Jawaban', 'V16', 1),
+(107, 37, 13, 'Jawaban', 'A16', 1),
+(108, 37, 14, 'Jawaban', 'R16', 1),
+(109, 37, 16, 'Jawaban', 'K16', 1),
+(110, 38, 12, 'Jawaban', 'V17', 1),
+(111, 38, 13, 'Jawaban', 'A17', 1),
+(112, 38, 14, 'Jawaban', 'R17', 1),
+(113, 38, 16, 'Jawaban', 'K17', 1),
+(114, 39, 12, 'Jawaban', 'V18', 1),
+(115, 39, 13, 'Jawaban', 'A18', 1),
+(116, 39, 14, 'Jawaban', 'R18', 1),
+(117, 39, 16, 'Jawaban', 'K18', 1),
+(118, 40, 12, 'Jawaban', 'V19', 1),
+(119, 40, 13, 'Jawaban', 'A19', 1),
+(120, 40, 14, 'Jawaban', 'R19', 1),
+(121, 40, 16, 'Jawaban', 'K19', 1),
+(122, 41, 12, 'Jawaban', 'V20', 1),
+(123, 41, 13, 'Jawaban', 'A20', 1),
+(124, 41, 14, 'Jawaban', 'R20', 1),
+(125, 41, 16, 'Jawaban', 'K20', 1);
 
 -- --------------------------------------------------------
 
@@ -211,7 +254,17 @@ INSERT INTO `pertanyaan` (`idpertanyaan`, `pertanyaan`, `kode`) VALUES
 (24, 'Saya menyukai website yang mempunyai ?', 'P7'),
 (25, 'Kamu memilih untuk menjadi guru atau pembawa acara. Apa yang akan kamu lakukan sebagai persiapan?', 'P8'),
 (26, 'Kamu telah selesai mengikuti kejuaraan atau tes dan menginginkan hasilnya. Bagaimana caramu mengetahui hasilnya ?', 'P9'),
-(27, 'Kamu akan membuat pidato yang penting di sebuah konferensi atau wawancara pekerjaan. Apa yang akan kamu lakukan ?', 'P10');
+(27, 'Kamu akan membuat pidato yang penting di sebuah konferensi atau wawancara pekerjaan. Apa yang akan kamu lakukan ?', 'P10'),
+(32, 'Pertanyaan 11', 'P11'),
+(33, 'Pertanyaan 12', 'P12'),
+(34, 'Pertanyaan 13', 'P13'),
+(35, 'Pertanyaan 14', 'P14'),
+(36, 'Pertanyaan 15', 'P15'),
+(37, 'Pertanyaan 16', 'P16'),
+(38, 'Pertanyaan 17', 'P17'),
+(39, 'Pertanyaan 18', 'P18'),
+(40, 'Pertanyaan 19', 'P19'),
+(41, 'Pertanyaan 20', 'P20');
 
 -- --------------------------------------------------------
 
@@ -287,7 +340,8 @@ INSERT INTO `user` (`iduser`, `username`, `pwd`, `nama`, `instansi`, `email`, `r
 (11, 'desy', '$2y$10$GZgOjKKh/7c7wUZEWtssPOQ2sD5.d4.KkH5IaNfathdH28uwSKCBy', 'Desy Fitriyani', 'Unjani', 'desyfitriyani@gmail.com', 'User'),
 (12, 'ekauser', '$2y$10$rJ9.26WPp6x1ODd4CYOuq./vJnkzYQoisJHwrdY5.8hxMu6VEnyyi', 'Eka Nurseva', 'umc', 'ekans@gmail.com', 'User'),
 (17, 'user1', '$2y$10$UyGZxTYisfXCpi0Ib8skQ.XwLhrKRTzHiVfvdf5CQ03FfOdG14usi', 'User1', 'UMC', 'user1@gmail.com', 'User'),
-(19, 'user2', '$2y$10$vwhOXdZOmdCbRWdtNR/pvu2/cKIxcpnFPY8w2Az66t6yQl26NvVKy', 'User2', 'UMC', 'user2@gmail.com', 'User');
+(19, 'user2', '$2y$10$vwhOXdZOmdCbRWdtNR/pvu2/cKIxcpnFPY8w2Az66t6yQl26NvVKy', 'User2', 'UMC', 'user2@gmail.com', 'User'),
+(20, 'coba', '$2y$10$fRo.4bbpQ/uTA9605HGg6Om3GogLsLt84awiJk7TlmSsyVp2GK5au', 'Coba 1', 'UMC', 'coba@gmail.com', 'User');
 
 --
 -- Indexes for dumped tables
@@ -348,13 +402,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `idhasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idhasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `jawaban`
 --
 ALTER TABLE `jawaban`
-  MODIFY `idjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `idjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT untuk tabel `kriteria`
@@ -366,13 +420,13 @@ ALTER TABLE `kriteria`
 -- AUTO_INCREMENT untuk tabel `model`
 --
 ALTER TABLE `model`
-  MODIFY `idmodel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idmodel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  MODIFY `idpertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idpertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `rekomendasi`
@@ -384,7 +438,7 @@ ALTER TABLE `rekomendasi`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
